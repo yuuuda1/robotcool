@@ -6,12 +6,8 @@ body {
   background-color: #FAFAFA;
 }
 
-header {
-  width: 100%;
-  height: 64px;
-  background-color: #009688;
-  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.4);
-  padding-left: 16px !important;
+.mdc-top-app-bar	{
+  --mdc-theme-primary: #ff9800;
 }
 
 header a{
@@ -40,7 +36,16 @@ header a{
 }
 
 .step-header {
-  width: 100%;
+  width: calc(100% - 32px);
   height: 48px;
+  line-height: 48px;
+  padding: 0 16px;
   border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+.edit-container {
+}
+
+.eye-size-h {
+  width: 120px !important;
 }
