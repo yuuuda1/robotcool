@@ -1,0 +1,21 @@
+/* 
+Table of contents
+1. App Bars - Top
+2. 
+*/
+
+/* App Bars - Top */
+.mdc-top-app-bar	{
+  --mdc-theme-primary: #ff9800;
+}
+
+/* Select */
+.demo-width-class {
+  min-width: 160px !important;
+  margin-right: 0.5rem;
+}
+
+/* Slider */
+.mdc-slider {
+  width: 158px !important;
+}

@@ -1,38 +1,40 @@
+/* 
+Table of contents
+1. Foundation
+2. 
+*/
+
+/* Foundation */
 a {
   text-decoration: none;
 }
 
+p {
+  font-size: 1rem;
+  color: rgba(0,0,0,0.6);
+}
+
 body {
   background-color: #FAFAFA;
-}
-
-.mdc-top-app-bar	{
   --mdc-theme-primary: #ff9800;
+  --mdc-theme-secondary: #2196f3;
 }
 
-header a{
-  color: #FFF;
-  font-size: 20px;
-  line-height: 64px;
+header {
 }
 
-.nav-drawer {
-  position: absolute;
-  top: 64px;
-  width: 60px;
-  height: calc(100vh - 64px);
-  background-color: #FFF;
+main {
+  padding: 24px;
 }
 
-.content {
+.paper-container {
   background-color: #FFF;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.4);
   border-radius: 4px;
-  width: calc(100vw - 108px);
+  width: calc(100vw - 48px);
   height: calc(100vh - 112px);
-  position: absolute;
-  top: 88px;
-  left: 84px;
+  position: relative;
+  top: 64px;
 }
 
 .step-header {
@@ -44,8 +46,49 @@ header a{
 }
 
 .edit-container {
+  display: flex;
+  align-items:stretch;
+  flex-direction: row; 
+  flex-wrap: nowrap;
+  height: 100%;
+  max-height: 534px;
+  padding: 32px 16px;
+}
+
+.edit-block {
+  min-width: 328px;
+}
+
+.parts-title {
+  padding-bottom: 16px;
+}
+
+
+
+.left-block {
+  margin-right: 16px;
+}
+
+.row-1 {
+  padding-bottom: 16px;
+}
+
+.row-2 {
+  display: flex;
+  padding-bottom: 24px;
 }
 
 .eye-size-h {
-  width: 120px !important;
+  margin-right: 16px;
+}
+
+.middle-block {
+  position: relative;
+  top: 0px;
+  width: 598px;
+  height: 520px;
+}
+
+.right-block {
+  margin-left: 16px;
 }
