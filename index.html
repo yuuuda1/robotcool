@@ -49,7 +49,7 @@
               <div class="mdc-select mdc-select--filled demo-width-class eye-select">
                 <div class="mdc-select__anchor">
                   <span class="mdc-select__ripple"></span>
-                  <span class="mdc-select__selected-text"></span>
+                  <span id="eye-list-item" class="mdc-select__selected-text"></span>
                   <span class="mdc-select__dropdown-icon">
                     <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">
                       <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
@@ -66,18 +66,19 @@
 
                 <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
                   <ul class="mdc-list">
-                    <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true">
+                    <!-- <li class="mdc-list-item" data-value="no-selected">
                       <span class="mdc-list-item__ripple"></span>
-                    </li>
-                    <li class="mdc-list-item" data-value="grains">
+                      <span class="mdc-list-item__text">未選択</span>
+                    </li> -->
+                    <li class="mdc-list-item" data-value="one">
                       <span class="mdc-list-item__ripple"></span>
                       <span class="mdc-list-item__text">パターン１</span>
                     </li>
-                    <li class="mdc-list-item" data-value="vegetables">
+                    <li class="mdc-list-item" data-value="second">
                       <span class="mdc-list-item__ripple"></span>
                       <span class="mdc-list-item__text">パターン２</span>
                     </li>
-                    <li class="mdc-list-item" data-value="fruit">
+                    <li class="mdc-list-item" data-value="third">
                       <span class="mdc-list-item__ripple"></span>
                       <span class="mdc-list-item__text">パターン３</span>
                     </li>
@@ -92,8 +93,8 @@
             <div class="row-2">
               <div class="eye-size-block">
                 <p>目の大きさ</p>
-                <div id="slider-h" class="mdc-slider eye-size-h" tabindex="0" role="slider" aria-valuemin="50"
-                  aria-valuemax="100" aria-valuenow="0" aria-label="Select Value">
+                <div id="slider-h" class="mdc-slider eye-size-h" tabindex="0" role="slider" aria-valuemin="0.1"
+                  aria-valuemax="2" aria-valuenow="1" aria-label="Select Value">
                   <div class="mdc-slider__track-container">
                     <div class="mdc-slider__track"></div>
                   </div>
@@ -128,7 +129,7 @@
               <div class="mdc-select mdc-select--filled demo-width-class mouse-select">
                 <div class="mdc-select__anchor">
                   <span class="mdc-select__ripple"></span>
-                  <span class="mdc-select__selected-text"></span>
+                  <span id="mouse-list-item" class="mdc-select__selected-text"></span>
                   <span class="mdc-select__dropdown-icon">
                     <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">
                       <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
@@ -145,9 +146,9 @@
 
                 <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
                   <ul class="mdc-list">
-                    <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true">
+                    <!-- <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true">
                       <span class="mdc-list-item__ripple"></span>
-                    </li>
+                    </li> -->
                     <li class="mdc-list-item" data-value="grains">
                       <span class="mdc-list-item__ripple"></span>
                       <span class="mdc-list-item__text">パターン１</span>
@@ -171,8 +172,8 @@
             <div class="row-2">
               <div class="eye-size-block">
                 <p>口の大きさ</p>
-                <div id="slider-mouse" class="mdc-slider mouse-size" tabindex="0" role="slider" aria-valuemin="0"
-                  aria-valuemax="100" aria-valuenow="20" aria-label="Select Value">
+                <div id="slider-mouse" class="mdc-slider mouse-size" tabindex="0" role="slider" aria-valuemin="0.1"
+                  aria-valuemax="2" aria-valuenow="1" aria-label="Select Value">
                   <div class="mdc-slider__track-container">
                     <div class="mdc-slider__track"></div>
                   </div>
@@ -186,6 +187,10 @@
               </div>
             </div>
           </div>
+          
+        </div>
+        <div id="canvas" class="middle-block"></div>
+        <div class="right-block edit-block">
           <div class="head-parts">
             <p class="parts-title">お好みの頭に編集してください</p>
             <div class="row-1">
@@ -250,10 +255,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div id="canvas" class="middle-block"></div>
-        <div class="right-block edit-block">
-          a
         </div>
       </div>
     </div>

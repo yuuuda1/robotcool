@@ -23,6 +23,9 @@ mouseSize.listen('MDCSlider:change', () => console.log(`Value changed to ${headS
 //-- Select --
 // - Eye - 
 const eyeSelect = new mdc.select.MDCSelect.attachTo(document.querySelector('.eye-select'));
+// eyeSelect.listen('MDCSelect:change', () => {
+//   alert(`Selected option at index ${eyeSelect.selectedIndex} with value "${eyeSelect.value}"`);
+// });
 // - Mouse - 
 const mouseSelect = new mdc.select.MDCSelect.attachTo(document.querySelector('.mouse-select'));
 // - Head -
