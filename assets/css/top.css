@@ -1,10 +1,11 @@
 /* 
 Table of contents
 1. Foundation
-2. 
+2. Depending on the class
 */
 
-/* Foundation */
+
+/* -- 1. Foundation -- */
 a {
   text-decoration: none;
 }
@@ -27,6 +28,12 @@ main {
   padding: 24px;
 }
 
+.disable {
+  display: none;
+}
+
+
+/* -- 2. Depending on the class -- */
 .paper-container {
   background-color: #FFF;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.4);
@@ -38,10 +45,10 @@ main {
 }
 
 .step-header {
-  width: calc(100% - 32px);
+  width: calc(100%);
   height: 48px;
   line-height: 48px;
-  padding: 0 16px;
+  /* padding: 0 16px; */
   border-bottom: 1px solid rgba(0,0,0,0.12);
 }
 
@@ -85,7 +92,7 @@ main {
 .middle-block {
   position: relative;
   top: 0px;
-  width: 598px;
+  width: calc(100vw - 758px);
   height: 520px;
 }
 

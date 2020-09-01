@@ -22,239 +22,345 @@
 </head>
 
 <body>
+  <!-- App Bars: top -->
   <header class="mdc-top-app-bar">
     <div class="mdc-top-app-bar__row">
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
         <span class="mdc-top-app-bar__title">Robotscool</span>
       </section>
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-        <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
+        <!-- <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button> -->
+        <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="help">help</button>
         <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
           aria-label="Options">more_vert</button>
       </section>
     </div>
   </header>
+
   <main>
-    <div class="paper-container">
-      <div class="step-header">
-        <div>
-          <a>頭パーツ</a>
+    <!-- Dialogs -->
+    <div class="mdc-dialog">
+      <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+          aria-describedby="my-dialog-content">
+          <div class="mdc-dialog__content" id="my-dialog-content">
+            Discard draft?
+          </div>
+          <div class="mdc-dialog__actions">
+            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">Cancel</span>
+            </button>
+            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="discard">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">Discard</span>
+            </button>
+          </div>
         </div>
       </div>
-      <div class="edit-container">
-        <div class="left-block edit-block">
-          <div class="eye-parts">
-            <p class="parts-title">お好みの目に編集してください</p>
-            <div class="row-1">
-              <div class="mdc-select mdc-select--filled demo-width-class eye-select">
-                <div class="mdc-select__anchor">
-                  <span class="mdc-select__ripple"></span>
-                  <span id="eye-list-item" class="mdc-select__selected-text"></span>
-                  <span class="mdc-select__dropdown-icon">
-                    <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">
-                      <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
-                        points="7 10 12 15 17 10">
-                      </polygon>
-                      <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
-                        points="7 15 12 10 17 15">
-                      </polygon>
-                    </svg>
-                  </span>
-                  <span class="mdc-floating-label">テンプレート</span>
-                  <span class="mdc-line-ripple"></span>
-                </div>
+      <div class="mdc-dialog__scrim"></div>
+    </div>
 
-                <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                  <ul class="mdc-list">
-                    <!-- <li class="mdc-list-item" data-value="no-selected">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">未選択</span>
-                    </li> -->
-                    <li class="mdc-list-item" data-value="one">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">パターン１</span>
-                    </li>
-                    <li class="mdc-list-item" data-value="second">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">パターン２</span>
-                    </li>
-                    <li class="mdc-list-item" data-value="third">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">パターン３</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <button class="mdc-button mdc-button--outlined eye-button" onclick="selectElement(`eye`)">
-                <div class="mdc-button__ripple"></div>
-                <span class="mdc-button__label">move</span>
-              </button>
-            </div>
-            <div class="row-2">
-              <div class="eye-size-block">
-                <p>目の大きさ</p>
-                <div id="slider-h" class="mdc-slider eye-size-h" tabindex="0" role="slider" aria-valuemin="0.1"
-                  aria-valuemax="2" aria-valuenow="1" aria-label="Select Value">
-                  <div class="mdc-slider__track-container">
-                    <div class="mdc-slider__track"></div>
-                  </div>
-                  <div class="mdc-slider__thumb-container">
-                    <svg class="mdc-slider__thumb" width="21" height="21">
-                      <circle cx="10.5" cy="10.5" r="7.875"></circle>
-                    </svg>
-                    <div class="mdc-slider__focus-ring"></div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <p>瞳孔の大きさ</p>
-                <div id="pupil-size" class="mdc-slider pupil-size" tabindex="0" role="slider" aria-valuemin="0"
-                  aria-valuemax="1" aria-valuenow="0.5" aria-label="Select Value">
-                  <div class="mdc-slider__track-container">
-                    <div class="mdc-slider__track"></div>
-                  </div>
-                  <div class="mdc-slider__thumb-container">
-                    <svg class="mdc-slider__thumb" width="21" height="21">
-                      <circle cx="10.5" cy="10.5" r="7.875"></circle>
-                    </svg>
-                    <div class="mdc-slider__focus-ring"></div>
-                  </div>
-                </div>
+    <!-- main content -->
+    <div class="paper-container">
+      <!-- Tab Bar -->
+      <div class="step-header">
+        <div class="mdc-tab-bar" role="tablist">
+          <div class="mdc-tab-scroller">
+            <div class="mdc-tab-scroller__scroll-area mdc-tab-scroller__scroll-area--scroll">
+              <div class="mdc-tab-scroller__scroll-content">
+                <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="-1">
+                  <span class="mdc-tab__content">
+                    <span class="mdc-tab__icon material-icons" aria-hidden="true">face</span>
+                    <span class="mdc-tab__text-label">顔の編集</span>
+                  </span>
+                  <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                  </span>
+                  <span class="mdc-tab__ripple"></span>
+                </button>
+                <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+                  <span class="mdc-tab__content">
+                    <span class="mdc-tab__icon material-icons" aria-hidden="true">android</span>
+                    <span class="mdc-tab__text-label">体の編集</span>
+                  </span>
+                  <span class="mdc-tab-indicator mdc-tab-indicator__content--underline">
+                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                  </span>
+                  <span class="mdc-tab__ripple"></span>
+                </button>
+                <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+                  <span class="mdc-tab__content">
+                    <span class="mdc-tab__icon material-icons" aria-hidden="true">preview</span>
+                    <span class="mdc-tab__text-label">プレビュー</span>
+                  </span>
+                  <span class="mdc-tab-indicator mdc-tab-indicator__content--underline">
+                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                  </span>
+                  <span class="mdc-tab__ripple"></span>
+                </button>
               </div>
             </div>
           </div>
-          <div class="mouse-parts">
-            <p class="parts-title">お好みの口に編集してください</p>
-            <div class="row-1">
-              <div class="mdc-select mdc-select--filled demo-width-class mouse-select">
-                <div class="mdc-select__anchor">
-                  <span class="mdc-select__ripple"></span>
-                  <span id="mouse-list-item" class="mdc-select__selected-text"></span>
-                  <span class="mdc-select__dropdown-icon">
-                    <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">
-                      <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
-                        points="7 10 12 15 17 10">
-                      </polygon>
-                      <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
-                        points="7 15 12 10 17 15">
-                      </polygon>
-                    </svg>
-                  </span>
-                  <span class="mdc-floating-label">テンプレート</span>
-                  <span class="mdc-line-ripple"></span>
-                </div>
-
-                <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                  <ul class="mdc-list">
-                    <!-- <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true">
-                      <span class="mdc-list-item__ripple"></span>
-                    </li> -->
-                    <li class="mdc-list-item" data-value="grains">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">パターン１</span>
-                    </li>
-                    <li class="mdc-list-item" data-value="vegetables">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">パターン２</span>
-                    </li>
-                    <li class="mdc-list-item" data-value="fruit">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">パターン３</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <button class="mdc-button mdc-button--outlined mouse-button" onclick="selectElement(`mouse`)">
-                <div class="mdc-button__ripple"></div>
-                <span class="mdc-button__label">move</span>
-              </button>
-            </div>
-            <div class="row-2">
-              <div class="eye-size-block">
-                <p>口の大きさ</p>
-                <div id="slider-mouse" class="mdc-slider mouse-size" tabindex="0" role="slider" aria-valuemin="0.1"
-                  aria-valuemax="2" aria-valuenow="1" aria-label="Select Value">
-                  <div class="mdc-slider__track-container">
-                    <div class="mdc-slider__track"></div>
-                  </div>
-                  <div class="mdc-slider__thumb-container">
-                    <svg class="mdc-slider__thumb" width="21" height="21">
-                      <circle cx="10.5" cy="10.5" r="7.875"></circle>
-                    </svg>
-                    <div class="mdc-slider__focus-ring"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
         </div>
-        <div id="canvas" class="middle-block"></div>
-        <div class="right-block edit-block">
-          <div class="head-parts">
-            <p class="parts-title">お好みの頭に編集してください</p>
-            <div class="row-1">
-              <div class="mdc-select mdc-select--filled demo-width-class head-select">
-                <div class="mdc-select__anchor">
-                  <span class="mdc-select__ripple"></span>
-                  <span class="mdc-select__selected-text"></span>
-                  <span class="mdc-select__dropdown-icon">
-                    <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">
-                      <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
-                        points="7 10 12 15 17 10">
-                      </polygon>
-                      <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
-                        points="7 15 12 10 17 15">
-                      </polygon>
-                    </svg>
-                  </span>
-                  <span class="mdc-floating-label">テンプレート</span>
-                  <span class="mdc-line-ripple"></span>
-                </div>
+      </div>
 
-                <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                  <ul class="mdc-list">
-                    <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true">
-                      <span class="mdc-list-item__ripple"></span>
-                    </li>
-                    <li class="mdc-list-item" data-value="grains">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">パターン１</span>
-                    </li>
-                    <li class="mdc-list-item" data-value="vegetables">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">パターン２</span>
-                    </li>
-                    <li class="mdc-list-item" data-value="fruit">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">パターン３</span>
-                    </li>
-                  </ul>
+      <div id="contents" class="">
+        <div id="content1" class="edit-container">
+          <div class="left-block edit-block">
+            <div class="eye-parts">
+              <p class="parts-title">お好みの目に編集してください</p>
+              <div class="row-1">
+                <div class="mdc-select mdc-select--filled demo-width-class eye-select">
+                  <div class="mdc-select__anchor">
+                    <span class="mdc-select__ripple"></span>
+                    <span id="eye-list-item" class="mdc-select__selected-text"></span>
+                    <span class="mdc-select__dropdown-icon">
+                      <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">
+                        <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                          points="7 10 12 15 17 10">
+                        </polygon>
+                        <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                          points="7 15 12 10 17 15">
+                        </polygon>
+                      </svg>
+                    </span>
+                    <span class="mdc-floating-label">テンプレート</span>
+                    <span class="mdc-line-ripple"></span>
+                  </div>
+
+                  <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                    <ul class="mdc-list">
+                      <!-- <li class="mdc-list-item" data-value="no-selected">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">未選択</span>
+                      </li> -->
+                      <li class="mdc-list-item" data-value="one">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン１</span>
+                      </li>
+                      <li class="mdc-list-item" data-value="second">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン２</span>
+                      </li>
+                      <li class="mdc-list-item" data-value="third">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン３</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="mdc-button mdc-button--outlined eye-button" onclick="selectElement(`eye`)">
+                  <div class="mdc-button__ripple"></div>
+                  <span class="mdc-button__label">move</span>
+                </button>
+              </div>
+              <div class="row-2">
+                <div class="eye-size-block">
+                  <p>目の大きさ</p>
+                  <div id="slider-h" class="mdc-slider eye-size-h" tabindex="0" role="slider" aria-valuemin="0.1"
+                    aria-valuemax="2" aria-valuenow="1" aria-label="Select Value">
+                    <div class="mdc-slider__track-container">
+                      <div class="mdc-slider__track"></div>
+                    </div>
+                    <div class="mdc-slider__thumb-container">
+                      <svg class="mdc-slider__thumb" width="21" height="21">
+                        <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                      </svg>
+                      <div class="mdc-slider__focus-ring"></div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <p>瞳孔の大きさ</p>
+                  <div id="pupil-size" class="mdc-slider pupil-size" tabindex="0" role="slider" aria-valuemin="0"
+                    aria-valuemax="1" aria-valuenow="0.5" aria-label="Select Value">
+                    <div class="mdc-slider__track-container">
+                      <div class="mdc-slider__track"></div>
+                    </div>
+                    <div class="mdc-slider__thumb-container">
+                      <svg class="mdc-slider__thumb" width="21" height="21">
+                        <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                      </svg>
+                      <div class="mdc-slider__focus-ring"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <button class="mdc-button mdc-button--outlined head-button" onclick="selectElement(`head`)">
-                <div class="mdc-button__ripple"></div>
-                <span class="mdc-button__label">move</span>
-              </button>
             </div>
-            <div class="row-2">
-              <div class="eye-size-block">
-                <p>顔の大きさ</p>
-                <div id="slider-head" class="mdc-slider head-size" tabindex="0" role="slider" aria-valuemin="50"
-                  aria-valuemax="100" aria-valuenow="0" aria-label="Select Value">
-                  <div class="mdc-slider__track-container">
-                    <div class="mdc-slider__track"></div>
+            <div class="mouse-parts">
+              <p class="parts-title">お好みの口に編集してください</p>
+              <div class="row-1">
+                <div class="mdc-select mdc-select--filled demo-width-class mouse-select">
+                  <div class="mdc-select__anchor">
+                    <span class="mdc-select__ripple"></span>
+                    <span id="mouse-list-item" class="mdc-select__selected-text"></span>
+                    <span class="mdc-select__dropdown-icon">
+                      <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">
+                        <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                          points="7 10 12 15 17 10">
+                        </polygon>
+                        <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                          points="7 15 12 10 17 15">
+                        </polygon>
+                      </svg>
+                    </span>
+                    <span class="mdc-floating-label">テンプレート</span>
+                    <span class="mdc-line-ripple"></span>
                   </div>
-                  <div class="mdc-slider__thumb-container">
-                    <svg class="mdc-slider__thumb" width="21" height="21">
-                      <circle cx="10.5" cy="10.5" r="7.875"></circle>
-                    </svg>
-                    <div class="mdc-slider__focus-ring"></div>
+
+                  <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                    <ul class="mdc-list">
+                      <!-- <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true">
+                        <span class="mdc-list-item__ripple"></span>
+                      </li> -->
+                      <li class="mdc-list-item" data-value="grains">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン１</span>
+                      </li>
+                      <li class="mdc-list-item" data-value="vegetables">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン２</span>
+                      </li>
+                      <li class="mdc-list-item" data-value="fruit">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン３</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
+                <button class="mdc-button mdc-button--outlined mouse-button" onclick="selectElement(`mouse`)">
+                  <div class="mdc-button__ripple"></div>
+                  <span class="mdc-button__label">move</span>
+                </button>
+              </div>
+              <div class="row-2">
+                <div class="eye-size-block">
+                  <p>口の大きさ</p>
+                  <div id="slider-mouse" class="mdc-slider mouse-size" tabindex="0" role="slider" aria-valuemin="0.1"
+                    aria-valuemax="2" aria-valuenow="1" aria-label="Select Value">
+                    <div class="mdc-slider__track-container">
+                      <div class="mdc-slider__track"></div>
+                    </div>
+                    <div class="mdc-slider__thumb-container">
+                      <svg class="mdc-slider__thumb" width="21" height="21">
+                        <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                      </svg>
+                      <div class="mdc-slider__focus-ring"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div id="canvas" class="middle-block"></div>
+          <div class="right-block edit-block">
+            <div class="head-parts">
+              <p class="parts-title">お好みの頭に編集してください</p>
+              <div class="row-1">
+                <div class="mdc-select mdc-select--filled demo-width-class head-select">
+                  <div class="mdc-select__anchor">
+                    <span class="mdc-select__ripple"></span>
+                    <span id="head-list-item" class="mdc-select__selected-text"></span>
+                    <span class="mdc-select__dropdown-icon">
+                      <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">
+                        <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                          points="7 10 12 15 17 10">
+                        </polygon>
+                        <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                          points="7 15 12 10 17 15">
+                        </polygon>
+                      </svg>
+                    </span>
+                    <span class="mdc-floating-label">テンプレート</span>
+                    <span class="mdc-line-ripple"></span>
+                  </div>
+
+                  <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                    <ul class="mdc-list">
+                      <!-- <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true">
+                        <span class="mdc-list-item__ripple"></span>
+                      </li> -->
+                      <li class="mdc-list-item" data-value="grains">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン１</span>
+                      </li>
+                      <li class="mdc-list-item" data-value="vegetables">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン２</span>
+                      </li>
+                      <li class="mdc-list-item" data-value="fruit">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン３</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="mdc-button mdc-button--outlined head-button" onclick="selectElement(`head`)">
+                  <div class="mdc-button__ripple"></div>
+                  <span class="mdc-button__label">move</span>
+                </button>
+              </div>
+              <div class="row-2">
+              </div>
+            </div>
+            <div class="display-parts">
+              <p class="parts-title">お好みのディスプレイに編集してください</p>
+              <div class="row-1">
+                <div class="mdc-select mdc-select--filled demo-width-class head-select">
+                  <div class="mdc-select__anchor">
+                    <span class="mdc-select__ripple"></span>
+                    <span id="display-list-item" class="mdc-select__selected-text"></span>
+                    <span class="mdc-select__dropdown-icon">
+                      <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">
+                        <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                          points="7 10 12 15 17 10">
+                        </polygon>
+                        <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                          points="7 15 12 10 17 15">
+                        </polygon>
+                      </svg>
+                    </span>
+                    <span class="mdc-floating-label">テンプレート</span>
+                    <span class="mdc-line-ripple"></span>
+                  </div>
+
+                  <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                    <ul class="mdc-list">
+                      <!-- <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true">
+                        <span class="mdc-list-item__ripple"></span>
+                      </li> -->
+                      <li class="mdc-list-item" data-value="grains">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン１</span>
+                      </li>
+                      <li class="mdc-list-item" data-value="vegetables">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン２</span>
+                      </li>
+                      <li class="mdc-list-item" data-value="fruit">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">パターン３</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="mdc-button mdc-button--outlined display-button" onclick="selectElement(`display`)">
+                  <div class="mdc-button__ripple"></div>
+                  <span class="mdc-button__label">move</span>
+                </button>
+              </div>
+              <div class="row-2">
               </div>
             </div>
           </div>
+        </div>
+        <div id="content2" class="">
+          これは体の編集画面
+        </div>
+        <div id="content3" class="">
+          これはプレビュー画面
         </div>
       </div>
     </div>
