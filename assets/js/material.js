@@ -49,8 +49,12 @@ dialog.listen('MDCDialog:opened', () => {
 
 /* -- 17. Sliders -- */
 // - Eye - 
-const sliderH = mdc.slider.MDCSlider.attachTo(document.querySelector('.eye-size-h'));
-sliderH.listen('MDCSlider:change', () => console.log(`Value changed to ${sliderH.value}`));
+const eyeSize = mdc.slider.MDCSlider.attachTo(document.querySelector('.eye-size'));
+eyeSize.listen('MDCSlider:change', () => console.log(`Value changed to ${eyeSize.value}`));
+const eyeWidth = mdc.slider.MDCSlider.attachTo(document.querySelector('.eye-width'));
+eyeWidth.listen('MDCSlider:change', () => console.log(`Value changed to ${eyeWidth.value}`));
+const eyeHeight = mdc.slider.MDCSlider.attachTo(document.querySelector('.eye-height'));
+eyeHeight.listen('MDCSlider:change', () => console.log(`Value changed to ${eyeHeight.value}`));
 // - Pupil -
 const pupilS = mdc.slider.MDCSlider.attachTo(document.querySelector('.pupil-size'));
 pupilS.listen('MDCSlider:change', () => console.log(`Value changed to ${pupilS.value}`));
@@ -74,3 +78,5 @@ const eyeSelect = new mdc.select.MDCSelect.attachTo(document.querySelector('.eye
 const mouseSelect = new mdc.select.MDCSelect.attachTo(document.querySelector('.mouse-select'));
 // - Head -
 const headSelect = new mdc.select.MDCSelect.attachTo(document.querySelector('.head-select'));
+// - Display -
+const displaySlect = new mdc.select.MDCSelect.attachTo(document.querySelector('.display-select'));
