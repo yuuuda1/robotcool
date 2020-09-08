@@ -15,6 +15,9 @@
  .1.d display
 1.2 Body
  .2.a Neck
+ .2.b Body
+ .2.c Arm
+ .2.d Leg
 1.x Global variable
  .x.a eye
  .x.b mouse
@@ -25,9 +28,9 @@
 
 // .1.0 Definition of canvas
 const canvasColor = '#ff980099';
-const canvasX = 598
+const canvasX = 600;
 // const canvasX = window.innerWidth - 758;
-const canvasY = 520;
+const canvasY = 560;
 console.log(window.innerWidth);
 
 // .1.a Eye
@@ -51,11 +54,21 @@ class eye {
     eyePattern = pattern;
   }
 
-  draw() {
-    fill('#FFF'); // Eye
-    ellipse(this.x, this.y, this.width, this.height);
-    fill('#222222'); // Pupil
-    ellipse(this.x, this.y, this.width * this.pupilScale, this.height * this.pupilScale);
+  draw(tabNum) {
+    if (tabNum == 1) {
+      fill('#FFF'); // Eye
+      ellipse(this.x, this.y, this.width, this.height);
+      fill('#222222'); // Pupil
+      ellipse(this.x, this.y, this.width * this.pupilScale, this.height * this.pupilScale);
+    }
+    if (tabNum == 2) {
+      if (this.x < canvasX / 2) var x = this.x + (canvasX / 2 - this.x) * (1.0 - windowScale);
+      if (this.x > canvasX / 2) var x = this.x - (this.x - canvasX / 2) * (1.0 - windowScale);
+      fill('#FFF'); // Eye
+      ellipse(x, this.y * windowScale, this.width * windowScale, this.height * windowScale);
+      fill('#222222'); // Pupil
+      ellipse(x, this.y * windowScale, this.width * this.pupilScale * windowScale, this.height * this.pupilScale * windowScale);
+    }
   }
 
   move(direction) {
@@ -113,17 +126,17 @@ class mouse {
 
     // pattern 1 : Human mouse
     if (mousePattern == "パターン１") {
-      arc(canvasX / 2, this.y, this.width * 2, this.height * 2, 0, PI, PIE);
+      arc(canvasX / 2, this.y * windowScale, this.width * 2 * windowScale, this.height * 2 * windowScale, 0, PI, PIE);
     }
 
     // pattern 2 : NAO mouse
     if (mousePattern == "パターン２") {
-      quad((canvasX - this.width) / 2, this.y, (canvasX + this.width) / 2, this.y, (canvasX + (this.width * 0.8)) / 2, this.y + this.height, (canvasX - (this.width * 0.8)) / 2, this.y + this.height);
+      quad((canvasX - this.width * windowScale) / 2, this.y * windowScale, (canvasX + this.width * windowScale) / 2, this.y * windowScale, (canvasX + (this.width * 0.8 * windowScale)) / 2, this.y * windowScale + this.height * windowScale, (canvasX - (this.width * 0.8 * windowScale)) / 2, this.y * windowScale + this.height * windowScale);
     }
 
     // pattern 3 : Triangle mouse
     if (mousePattern == "パターン３") {
-      triangle((canvasX - this.width) / 2, this.y + this.height, canvasX / 2, this.y, (canvasX + this.width) / 2, this.y + this.height);
+      triangle((canvasX - this.width * windowScale) / 2, this.y * windowScale + this.height * windowScale, canvasX / 2, this.y * windowScale, (canvasX + this.width * windowScale) / 2, this.y * windowScale + this.height * windowScale);
     }
   }
 
@@ -168,11 +181,11 @@ class head {
     if (headPattern == "パターン１") {
       strokeWeight(0);
       beginShape();
-      vertex(299, 20);
-      bezierVertex(520, 40, 500, 180, 500, 260);
-      bezierVertex(500, 260, 500, 440, 299, 500);
-      bezierVertex(299, 500, 98, 440, 98, 260);
-      bezierVertex(98, 180, 78, 40, 299, 20);
+      vertex(canvasX / 2, 20 * windowScale);
+      bezierVertex(canvasX / 2 + 220 * windowScale, 40 * windowScale, canvasX / 2 + 200 * windowScale, 180 * windowScale, canvasX / 2 + 200 * windowScale, 260 * windowScale);
+      bezierVertex(canvasX / 2 + 200 * windowScale, 260 * windowScale, canvasX / 2 + 200 * windowScale, 440 * windowScale, canvasX / 2, 500 * windowScale);
+      bezierVertex(canvasX / 2, 500 * windowScale, canvasX / 2 - 200 * windowScale, 440 * windowScale, canvasX / 2 - 200 * windowScale, 260 * windowScale);
+      bezierVertex(canvasX / 2 - 200 * windowScale, 180 * windowScale, canvasX / 2 - 220 * windowScale, 40 * windowScale, canvasX / 2, 20 * windowScale);
       endShape();
       strokeWeight(1);
     }
@@ -181,9 +194,9 @@ class head {
     if (headPattern == "パターン２") {
       fill('#fcfcfc');
       strokeWeight(0);
-      rect(469, 140, 80, 240, 20, 20, 20, 20);
-      rect(49, 140, 80, 240, 20, 20, 20, 20);
-      ellipse(299, 260, 480, 420);
+      rect(canvasX / 2 + 169 * windowScale, 140 * windowScale, 80 * windowScale, 240 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale);
+      rect(canvasX / 2 - 251 * windowScale, 140 * windowScale, 80 * windowScale, 240 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale);
+      ellipse(canvasX / 2, 260 * windowScale, 480 * windowScale, 420 * windowScale);
       strokeWeight(1);
     }
 
@@ -191,19 +204,14 @@ class head {
     if (headPattern == "パターン３") {
       strokeWeight(0);
       beginShape();
-      vertex(299, 80);
-      bezierVertex(540, 96, 520, 240, 540, 480);
-      vertex(58, 480);
-      bezierVertex(78, 240, 58, 96, 299, 80);
+      vertex(canvasX / 2, 80 * windowScale);
+      bezierVertex(canvasX / 2 + 240 * windowScale, 96 * windowScale, canvasX / 2 + 220 * windowScale, 240 * windowScale, canvasX / 2 + 240 * windowScale, 500 * windowScale);
+      vertex(canvasX / 2 - 242 * windowScale, 500 * windowScale);
+      bezierVertex(canvasX / 2 - 222 * windowScale, 240 * windowScale, canvasX / 2 - 242 * windowScale, 96 * windowScale, canvasX / 2, 80 * windowScale);
       endShape();
       strokeWeight(1);
     }
   }
-
-  // move(direction) {
-  //   if (direction == "up") this.y -= 10;
-  //   if (direction == "down") this.y += 10;
-  // }
 }
 
 // .1.d display
@@ -225,12 +233,12 @@ class display {
 
     // pattern 1
     if (displayPattern == "パターン１") {
-      rect((canvasX - this.width) / 2, this.y, this.width, this.height, this.radius);
+      rect((canvasX - this.width * windowScale) / 2, this.y * windowScale, this.width * windowScale, this.height * windowScale, this.radius * windowScale);
     }
 
     // pattern 2
     if (displayPattern == "パターン２") {
-      rect((canvasX - this.width) / 2, this.y, this.width, this.height, this.radius, this.radius, 0, 0);
+      rect((canvasX - this.width * windowScale) / 2, this.y * windowScale, this.width * windowScale, this.height * windowScale, this.radius * windowScale, this.radius * windowScale, 0, 0);
     }
   }
 
@@ -241,24 +249,240 @@ class display {
 }
 
 
-/* -- 1.x Global variable -- */
+/* -- 1.2 Head Global variable -- */
+let windowScale = 1.0;
 
-// .x.a Eye
+// .2.a Eye
 let eyePattern = "";
 let rightEye = new eye(canvasX / 2 - 100, 260, 50, 50, 1.0, "rightEye");  // 右目
 let leftEye = new eye(canvasX / 2 + 100, 260, 50, 50, 1.0, "leftEye");    // 左目
 
-// .x.b Mouse
+// .2.b Mouse
 let mousePattern = "";
-let mouseM = new mouse((canvasX - 400) / 2, 400, 20, 20, 1.0);
+let robotMouse = new mouse((canvasX - 400) / 2, 400, 20, 20, 1.0);
 
-// .x.c Head
+// .2.c Head
 let headPattern = "";
 let robotHead = new head((canvasX - 400) / 2, 60, 400, 400, 16);
 
-// .x.d display
+// .2.d display
 let displayPattern = "";
 let robotDisplay = new display((canvasX - 400) / 2, 160, 320, 160, 40);
+
+
+/* -- 1.3 BODY -- */
+
+// .3.a Neck 
+class neck {
+  constructor(x, y, width, height, neckScale) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.neck = neckScale;
+  }
+
+  init(pattern) {
+    if (pattern == "パターン１");
+    if (pattern == "パターン２");
+    if (pattern == "パターン３");
+    neckPattern = pattern;
+  }
+
+  draw() {
+    fill('#F8F8F8');
+    strokeWeight(0);
+    ellipse(this.x, this.y * windowScale, this.width, this.height);
+    strokeWeight(1);
+    if (neckPattern == "パターン１") {
+      ellipse(this.x, this.y, this.width, this.height);
+    }
+    if (neckPattern == "パターン２") {
+
+    }
+    if (neckPattern == "パターン３") {
+    }
+  }
+
+  move(direction) {
+    if (direction == "up") this.y -= 10;
+    if (direction == "down") this.y += 10;
+  }
+
+  resize(value) {
+    if (value > this.neckScale) {
+      this.width = this.width * value / this.neckScale;
+      this.height = this.height * value / this.neckScale;
+    } else if (value < this.neckScale) {
+      this.width = this.width * value / this.neckScale;
+      this.height = this.height * value / this.neckScale;
+    }
+    this.neckScale = value;
+  }
+}
+
+// .3.b Body 
+class body {
+  constructor(x, y, width, height, bodyScale) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.radius = 20;
+    this.neck = bodyScale;
+  }
+
+  init(pattern) {
+    if (pattern == "パターン１");
+    if (pattern == "パターン２");
+    if (pattern == "パターン３");
+    bodyPattern = pattern;
+  }
+
+  draw() {
+    fill('#fcfcfc');
+    strokeWeight(0);
+    // ellipse(this.x, this.y, this.width, this.height);
+    rect((canvasX - this.width) / 2, this.y * windowScale, this.width, this.height, this.radius);
+    strokeWeight(1);
+    if (bodyPattern == "パターン１") {
+      ellipse(this.x, this.y, this.width, this.height);
+    }
+    if (bodyPattern == "パターン２") {
+
+    }
+    if (bodyPattern == "パターン３") {
+    }
+  }
+
+  move(direction) {
+    if (direction == "up") this.y -= 10;
+    if (direction == "down") this.y += 10;
+  }
+
+  resize(value) {
+    if (value > this.neckScale) {
+      this.width = this.width * value / this.bodyScale;
+      this.height = this.height * value / this.bodyScale;
+    } else if (value < this.neckScale) {
+      this.width = this.width * value / this.bodyScale;
+      this.height = this.height * value / this.bodyScale;
+    }
+    this.bodyScale = value;
+  }
+}
+
+// .3.c Arm 
+class arm {
+  constructor(x, y, width, height, lor) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.armScale = 1.0;
+    this.radius = 20;
+    this.lor = lor;     // Light or Right
+  }
+
+  init(pattern) {
+    if (pattern == "パターン１");
+    if (pattern == "パターン２");
+    if (pattern == "パターン３");
+    armPattern = pattern;
+  }
+
+  draw() {
+    fill('#FFF'); // Eye
+    strokeWeight(0);
+    rect(this.x - this.width / 2, this.y * windowScale, this.width, this.height, this.radius);
+    strokeWeight(1);
+  }
+
+  move(direction) {
+    if (direction == "up") this.y -= 10;
+    if (direction == "down") this.y += 10;
+  }
+
+  resize(value, direction) {
+    if (direction == "width") {
+      this.width = this.width * value / this.armScale;
+      this.widthScale = value;
+    } else if (direction == "height") {
+      this.height = this.height * value / this.armScale;
+      this.heightScale = value;
+    } else if (direction == "size") {
+      this.width = this.width * value / this.armScale;
+      this.height = this.height * value / this.armScale;
+      this.armScale = value;
+    }
+  }
+}
+
+// .3.d Leg 
+class leg {
+  constructor(x, y, width, height, lor) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.legScale = 1.0;
+    this.radius = 20;
+    this.lor = lor;     // Light or Right
+  }
+
+  init(pattern) {
+    if (pattern == "パターン１");
+    if (pattern == "パターン２");
+    if (pattern == "パターン３");
+    legPattern = pattern;
+  }
+
+  draw() {
+    fill('#FFF'); // Eye
+    strokeWeight(0);
+    rect(this.x - this.width / 2, this.y * windowScale, this.width, this.height, this.radius);
+    strokeWeight(1);
+  }
+
+  move(direction) {
+    if (direction == "up") this.y -= 10;
+    if (direction == "down") this.y += 10;
+  }
+
+  resize(value, direction) {
+    if (direction == "width") {
+      this.width = this.width * value / this.legScale;
+      this.widthScale = value;
+    } else if (direction == "height") {
+      this.height = this.height * value / this.legScale;
+      this.heightScale = value;
+    } else if (direction == "size") {
+      this.width = this.width * value / this.legScale;
+      this.height = this.height * value / this.legScale;
+      this.legScale = value;
+    }
+  }
+}
+
+/* -- 1.4 Body Global variable -- */
+
+// .4.a Neck
+let neckPattern = "";
+let robotNeck = new neck(canvasX / 2, 500, 40, 40, 1.0);
+
+// .4.b Body
+let bodyPattern = "";
+let robotBody = new body(canvasX / 2, 500, 160, 200, 1.0);
+
+// .4.c Arm
+let armPattern = "";
+let leftArm = new arm(canvasX / 2 - 108, 500, 48, 220, "left");
+let rightArm = new arm(canvasX / 2 + 108, 500, 48, 220, "right");
+
+// .4.d leg 
+let legPattern = "";
+let leftLeg = new leg(canvasX / 2 - 40, 1080, 56, 220, "left");
+let rightLeg = new leg(canvasX / 2 + 40, 1080, 56, 220, "right");
 
 // .x.x 
 let selected = "";
@@ -292,16 +516,32 @@ function draw() {
 
   // Depiction of the head
   if (tabNum == 1) {
+    windowScale = 1.0;
     cnvs.parent('canvas1');
     robotHead.draw();
     robotDisplay.draw();
-    mouseM.draw();
-    rightEye.draw();  // 右目
-    leftEye.draw();   // 左目
+    robotMouse.draw();
+    rightEye.draw(tabNum);  // 右目
+    leftEye.draw(tabNum);   // 左目
   }
 
   if (tabNum == 2) {
+    windowScale = 0.3;
     cnvs.parent('canvas2');
+    leftArm.draw();
+    rightArm.draw();
+    leftLeg.draw();
+    rightLeg.draw();
+    robotBody.draw();
+    robotNeck.draw();
+
+
+
+    robotHead.draw();
+    robotDisplay.draw();
+    robotMouse.draw();
+    rightEye.draw(tabNum);  // 右目
+    leftEye.draw(tabNum);   // 左目
   }
 
   if (tabNum == 3) {
@@ -332,8 +572,8 @@ function keyPressed() {
 
   // 口
   if (selected == "mouse") {
-    if (keyCode === UP_ARROW) mouseM.move("up");
-    if (keyCode === DOWN_ARROW) mouseM.move("down");
+    if (keyCode === UP_ARROW) robotMouse.move("up");
+    if (keyCode === DOWN_ARROW) robotMouse.move("down");
   }
 
   // Head
@@ -371,7 +611,7 @@ function mouseReleased() {
   // 口のスライダー
   var mouseSize = document.getElementById("slider-mouse").getAttribute("aria-valuenow");
   // if (mouseSize != mouthW) mouthW = mouseSize, mouthH = mouseSize;
-  mouseM.resize(mouseSize);
+  robotMouse.resize(mouseSize);
 }
 
 // 2.5 MOUSE_DRAGGED：マウスがドラッグされている間
@@ -386,7 +626,7 @@ function mouseDragged() {
   if (selected == "mouse") {
     if ((mouseX < 0) || (mouseX > canvasX)) selected = "";
     if ((mouseY < 0) || (mouseY > canvasY)) selected = "";
-    mouseM.y = mouseY;
+    robotMouse.y = mouseY;
   }
 }
 
@@ -410,7 +650,7 @@ function changedPattern(pattern, element) {
 
   // 口 
   if (element == "mouse") {
-    if (mousePattern != pattern) mouseM.init(pattern);
+    if (mousePattern != pattern) robotMouse.init(pattern);
   }
 
   // Head 
@@ -444,4 +684,24 @@ function tabSwiching() {
   if (tab3 == "true") content3.classList.remove("disable"), content3.classList.add("active", "edit-container"), index = 3;
 
   return index;
+}
+
+function sendMail() {
+
+  var input_text = document.getElementById("email-text").value;
+  alert(input_text)
+  console.log(input_text);
+
+  Email.send({
+    SecureToken: "d4c96642-e1aa-4be4-aed1-bf2360d5535d",
+    Host: "smtp.elasticemail.com",
+    Username: "i2086051@cc.kyoto-su.ac.jp",
+    To: 'https://makeupwith.github.io/robotcool/index.html',
+    From: input_text,
+    Subject: "This is the subject",
+    Body: "And this is the body"
+  }).then(
+    message => alert(message)
+  );
+
 }

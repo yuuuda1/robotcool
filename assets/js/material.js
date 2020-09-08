@@ -70,6 +70,8 @@ mouseSize.listen('MDCSlider:change', () => console.log(`Value changed to ${mouse
 const tabBar = mdc.tabBar.MDCTabBar.attachTo(document.querySelector('.mdc-tab-bar'));
 tabBar.listen('MDCTABBAR:change', () => console.log(`Value changed to ${tabBar.value}`));
 
+/* -- 20. Text -- */
+
 
 /* -- E1. Selects -- */
 // - Eye - 

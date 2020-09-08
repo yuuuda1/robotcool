@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Robotcool</title>
+  <title>DeaRobot</title>
 
   <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="assets/css/mdc.css">
@@ -411,6 +411,16 @@
               <div class="row-2">
               </div>
             </div>
+            <form>
+              <div>
+                <label for="message">message:</label><br>
+                <input id="email-text" type="text" />
+              </div>
+
+              <div class="button">
+                <button type="submit" onclick="sendMail()">メッセージを送信</button>
+              </div>
+            </form>
             <div class="body-parts">
             </div>
           </div>
@@ -421,5 +431,9 @@
   </main>
 </body>
 <script src="./assets/js/material.js"></script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script type="javascript">
+
+</script>
 
 </html>
