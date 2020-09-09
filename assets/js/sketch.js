@@ -694,8 +694,6 @@ function sendMail() {
 
   Email.send({
     SecureToken: "d4c96642-e1aa-4be4-aed1-bf2360d5535d",
-    Host: "smtp.elasticemail.com",
-    Username: "i2086051@cc.kyoto-su.ac.jp",
     To: 'https://makeupwith.github.io/robotcool/index.html',
     From: input_text,
     Subject: "This is the subject",
