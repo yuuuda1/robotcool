@@ -43,17 +43,97 @@
       <div class="mdc-dialog__container">
         <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
           aria-describedby="my-dialog-content">
+          <h2 class="mdc-dialog__title" id="my-dialog-title">
+            色の変更
+          </h2>
           <div class="mdc-dialog__content" id="my-dialog-content">
-            Discard draft?
+            <div class="cm-slider-block">
+              <div class="color-model-block">
+                <p>Red</p>
+                <div id="color-model-red" class="mdc-slider color-model-red mdc-slider--discrete" tabindex="0"
+                  role="slider" aria-valuemin="0" aria-valuemax="255" aria-valuenow="0" aria-label="Select Value">
+                  <div class="mdc-slider__track-container">
+                    <div class="mdc-slider__track"></div>
+                  </div>
+                  <div class="mdc-slider__thumb-container">
+                    <div class="mdc-slider__pin">
+                      <span class="mdc-slider__pin-value-marker"></span>
+                    </div>
+                    <svg class="mdc-slider__thumb" width="21" height="21">
+                      <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                    </svg>
+                    <div class="mdc-slider__focus-ring"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="color-model-block">
+                <p>Green</p>
+                <div id="color-model-green" class="mdc-slider color-model-green mdc-slider--discrete" tabindex="0"
+                  role="slider" aria-valuemin="0" aria-valuemax="255" aria-valuenow="0" aria-label="Select Value">
+                  <div class="mdc-slider__track-container">
+                    <div class="mdc-slider__track"></div>
+                  </div>
+                  <div class="mdc-slider__thumb-container">
+                    <div class="mdc-slider__pin">
+                      <span class="mdc-slider__pin-value-marker"></span>
+                    </div>
+                    <svg class="mdc-slider__thumb" width="21" height="21">
+                      <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                    </svg>
+                    <div class="mdc-slider__focus-ring"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="color-model-block">
+                <p>Blue</p>
+                <div id="color-model-blue" class="mdc-slider color-model-blue mdc-slider--discrete" tabindex="0"
+                  role="slider" aria-valuemin="0" aria-valuemax="255" aria-valuenow="0" aria-label="Select Value">
+                  <div class="mdc-slider__track-container">
+                    <div class="mdc-slider__track"></div>
+                  </div>
+                  <div class="mdc-slider__thumb-container">
+                    <div class="mdc-slider__pin">
+                      <span class="mdc-slider__pin-value-marker"></span>
+                    </div>
+                    <svg class="mdc-slider__thumb" width="21" height="21">
+                      <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                    </svg>
+                    <div class="mdc-slider__focus-ring"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="color-pallet-block">
+              <p>カラーパレット</p>
+              <a href="javascript:onPalletClick(`red-500`);" class="btn-circle-flat red-500"></a>
+              <a href="javascript:onPalletClick(`pink-500`);" class="btn-circle-flat pink-500"></a>
+              <a href="javascript:onPalletClick(`purple-500`);" class="btn-circle-flat purple-500"></a>
+              <a href="javascript:onPalletClick(`deep-purple-500`);" class="btn-circle-flat deep-purple-500"></a>
+              <a href="javascript:onPalletClick(`indigo-500`);" class="btn-circle-flat indigo-500"></a>
+              <a href="javascript:onPalletClick(`blue-500`);" class="btn-circle-flat blue-500"></a>
+              <a href="javascript:onPalletClick(`light-blue-500`);" class="btn-circle-flat light-blue-500"></a>
+              <a href="javascript:onPalletClick(`cyan-500`);" class="btn-circle-flat cyan-500"></a>
+              <a href="javascript:onPalletClick(`teal-500`);" class="btn-circle-flat teal-500"></a>
+              <a href="javascript:onPalletClick(`green-500`);" class="btn-circle-flat green-500"></a>
+              <a href="javascript:onPalletClick(`light-green-500`);" class="btn-circle-flat light-green-500"></a>
+              <a href="javascript:onPalletClick(`lime-500`);" class="btn-circle-flat lime-500"></a>
+              <a href="javascript:onPalletClick(`yellow-500`);" class="btn-circle-flat yellow-500"></a>
+              <a href="javascript:onPalletClick(`amber-500`);" class="btn-circle-flat amber-500"></a>
+              <a href="javascript:onPalletClick(`orange-500`);" class="btn-circle-flat orange-500"></a>
+              <a href="javascript:onPalletClick(`deep-orange-500`);" class="btn-circle-flat deep-orange-500"></a>
+              <a href="javascript:onPalletClick(`brown-500`);" class="btn-circle-flat brown-500"></a>
+              <a href="javascript:onPalletClick(`grey-500`);" class="btn-circle-flat grey-500"></a>
+              <a href="javascript:onPalletClick(`blue-grey-500`);" class="btn-circle-flat blue-grey-500"></a>
+            </div>
           </div>
           <div class="mdc-dialog__actions">
             <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
               <div class="mdc-button__ripple"></div>
-              <span class="mdc-button__label">Cancel</span>
+              <span class="mdc-button__label">キャンセル</span>
             </button>
             <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="discard">
               <div class="mdc-button__ripple"></div>
-              <span class="mdc-button__label">Discard</span>
+              <span class="mdc-button__label">保存</span>
             </button>
           </div>
         </div>
@@ -109,7 +189,7 @@
         <div id="content1" class="edit-container">
           <div class="left-block edit-block">
             <div class="eye-parts">
-              <p class="parts-title">お好みの目に編集してください</p>
+              <p class="parts-title">1. お好みの目に編集してください</p>
               <div class="row-1">
                 <div class="mdc-select mdc-select--filled demo-width-class eye-select">
                   <div class="mdc-select__anchor">
@@ -148,7 +228,11 @@
                 </div>
                 <button class="mdc-button mdc-button--outlined eye-button" onclick="selectElement(`eye`)">
                   <div class="mdc-button__ripple"></div>
-                  <span class="mdc-button__label">move</span>
+                  <span class="mdc-button__label">移動</span>
+                </button>
+                <button onclick="changeColor(`eye`)" id="color-dialog" class="mdc-button mdc-button--outlined">
+                  <div class="mdc-button__ripple"></div>
+                  <span class="mdc-button__label">色</span>
                 </button>
               </div>
               <div class="row-2">

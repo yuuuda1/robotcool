@@ -39,15 +39,33 @@ mdc.ripple.MDCRipple.attachTo(document.querySelector('.head-button'));
 
 
 /* -- 8. Dialogs -- */
-const dialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.mdc-dialog'));
-// const list = mdc.list.MDCList.attachTo(document.querySelector('.mdc-dialog .mdc-list'));
-dialog.listen('MDCDialog:opened', () => {
+const colorDialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.mdc-dialog'));
+colorDialog.listen('MDCDialog:opened', () => {
   console.log("open dailog")
-  // list.layout();
+});
+colorDialog.listen('MDCDialog:closed', () => {
+  console.log("close dailog")
+});
+document.querySelector('#color-dialog').addEventListener('click', function (evt) {
+  colorDialog.open();
+  cmRed.layout();
+  cmGreen.layout();
+  cmBlue.layout();
 });
 
 
 /* -- 17. Sliders -- */
+// -- Color Model --
+// - Red -
+const cmRed = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-dialog .color-model-red'));
+cmRed.listen('MDCSlider:change', () => console.log(`Value changed to ${cmRed.value}`));
+// - Green -
+const cmGreen = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-dialog .color-model-green'));
+cmRed.listen('MDCSlider:change', () => console.log(`Value changed to ${cmGreen.value}`));
+// - Blue -
+const cmBlue = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-dialog .color-model-blue'));
+cmRed.listen('MDCSlider:change', () => console.log(`Value changed to ${cmBlue.value}`));
+
 // - Eye - 
 const eyeSize = mdc.slider.MDCSlider.attachTo(document.querySelector('.eye-size'));
 eyeSize.listen('MDCSlider:change', () => console.log(`Value changed to ${eyeSize.value}`));
@@ -69,6 +87,7 @@ mouseSize.listen('MDCSlider:change', () => console.log(`Value changed to ${mouse
 /* -- 18. Tabs -- */
 const tabBar = mdc.tabBar.MDCTabBar.attachTo(document.querySelector('.mdc-tab-bar'));
 tabBar.listen('MDCTABBAR:change', () => console.log(`Value changed to ${tabBar.value}`));
+
 
 /* -- 20. Text -- */
 
