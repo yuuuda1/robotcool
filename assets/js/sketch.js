@@ -689,12 +689,12 @@ function tabSwiching() {
 function sendMail() {
 
   var input_text = document.getElementById("email-text").value;
-  alert(input_text)
-  console.log(input_text);
+  // alert(input_text)
+  // console.log(input_text);
 
   Email.send({
     SecureToken: "d4c96642-e1aa-4be4-aed1-bf2360d5535d",
-    To: 'https://makeupwith.github.io/robotcool/index.html',
+    To: 'i2086051@cc.kyoto-su.ac.jp',
     From: input_text,
     Subject: "This is the subject",
     Body: "And this is the body"
