@@ -1,21 +1,123 @@
 /* 
-Table of contents
-1. App Bars - Top
-2. 
+*** Material Design Components ***
+1. App Bars: top
+2. Buttons
+3. Buttons: floating action button
+4. Buttons: icon button
+5. Cards
+6. Chips
+7. Data tabels
+8. Dialogs
+9. Image list
+10. Lists
+11. Menus
+12. Navigaton drawer
+13. Progress indicators
+14. Selection controls: checkboxes
+15. Selection controls: radio buttons
+16. Selection controls: switches
+17. Sliders
+18. Snackbars
+19. Tabs
+20. Text fields
+E1. Selects
+Ex. Colors
 */
 
-/* App Bars - Top */
+/* -- 1. App Bars: top -- */
 .mdc-top-app-bar	{
   --mdc-theme-primary: #ff9800;
 }
 
-/* Select */
+/* -- 2. Buttons -- */
 .demo-width-class {
   min-width: 160px !important;
   margin-right: 0.5rem;
 }
 
-/* Slider */
+/* -- 8. Dialogs -- */
+.mdc-dialog__surface {
+  width: 480px;
+}
+
+/* -- 17. Sliders -- */
 .mdc-slider {
   width: 158px !important;
+}
+
+/* -- Ex. Colors -- */
+.red-500 {
+  background-color: #f44336;
+}
+
+.pink-500 {
+  background-color: #e91e63;
+}
+
+.purple-500 {
+  background-color: #9c27b0;
+}
+
+.deep-purple-500 {
+  background-color: #673ab7;
+}
+
+.indigo-500 {
+  background-color: #3f51b5;
+}
+
+.blue-500 {
+  background-color: #2196f3;
+}
+
+.light-blue-500 {
+  background-color: #03a9f4;
+}
+
+.cyan-500 {
+  background-color: #00bcd4;
+}
+
+.teal-500 {
+  background-color: #009688;
+}
+
+.green-500 {
+  background-color: #4caf50;
+}
+
+.light-green-500 {
+  background-color: #8bc34a;
+}
+
+.lime-500 {
+  background-color: #cddc39;
+}
+
+.yellow-500 {
+  background-color: #ffeb3b;
+}
+
+.amber-500 {
+  background-color: #ffc107;
+}
+
+.orange-500 {
+  background-color: #ff9800;
+}
+
+.deep-orange-500 {
+  background-color: #ff5722;
+}
+
+.brown-500 {
+  background-color: #795548;
+}
+
+.grey-500 {
+  background-color: #9e9e9e;
+}
+
+.blue-grey-500 {
+  background-color: #607d8b;
 }

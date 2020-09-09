@@ -44,6 +44,9 @@ class eye {
     this.widthScale = 1;
     this.heightScale = 1;
     this.pupilScale = 0.5;
+    this.colorRed = 0;
+    this.colorGreen = 0;
+    this.colorBlue = 0;
     this.lor = lor;     // Light or Right
   }
 
@@ -58,7 +61,9 @@ class eye {
     if (tabNum == 1) {
       fill('#FFF'); // Eye
       ellipse(this.x, this.y, this.width, this.height);
-      fill('#222222'); // Pupil
+      // fill('#222222'); // Pupil
+      // fill(`rgba(this.colorRed, this.colorGreen, this.colorBlue, 1.0)`);
+      fill(color(this.colorRed, this.colorGreen, this.colorBlue));
       ellipse(this.x, this.y, this.width * this.pupilScale, this.height * this.pupilScale);
     }
     if (tabNum == 2) {
@@ -100,6 +105,13 @@ class eye {
 
   repupilSize(value) {
     this.pupilScale = value;
+  }
+
+  reColor(color) {
+    this.colorRed = color[0];
+    this.colorGreen = color[1];
+    this.colorBlue = color[2];
+    console.log(this.colorRed, this.colorGreen, this.colorGreen);
   }
 
 }
@@ -686,11 +698,31 @@ function tabSwiching() {
   return index;
 }
 
-function sendMail() {
 
+// 
+let selectColorParts = "";
+function changeColor(parts) {
+  selectColorParts = parts;
+  console.log(selectColorParts);
+}
+
+function onPalletClick(colorValue) {
+  if (selectColorParts == "eye") {
+    leftEye.reColor(returnColorModel(colorValue));
+  }
+  console.log(colorValue);
+}
+
+function returnColorModel(colorName) {
+  console.log(colorName);
+  if (colorName == "red-500") return [211, 68, 57];
+}
+
+
+// SEND_MAIL：結果をSMTPサーバーに転送する関数
+function sendMail() {
+  // 氏名とメールアドレス
   var input_text = document.getElementById("email-text").value;
-  // alert(input_text)
-  // console.log(input_text);
 
   Email.send({
     SecureToken: "d4c96642-e1aa-4be4-aed1-bf2360d5535d",
