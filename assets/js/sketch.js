@@ -47,6 +47,7 @@ class eye {
     this.colorRed = 0;
     this.colorGreen = 0;
     this.colorBlue = 0;
+    this.colorAlpha = 0;
     this.lor = lor;     // Light or Right
   }
 
@@ -63,7 +64,7 @@ class eye {
       ellipse(this.x, this.y, this.width, this.height);
       // fill('#222222'); // Pupil
       // fill(`rgba(this.colorRed, this.colorGreen, this.colorBlue, 1.0)`);
-      fill(color(this.colorRed, this.colorGreen, this.colorBlue));
+      fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
       ellipse(this.x, this.y, this.width * this.pupilScale, this.height * this.pupilScale);
     }
     if (tabNum == 2) {
@@ -111,7 +112,9 @@ class eye {
     this.colorRed = color[0];
     this.colorGreen = color[1];
     this.colorBlue = color[2];
-    console.log(this.colorRed, this.colorGreen, this.colorGreen);
+    this.colorAlpha = color[3];
+    syncSelectorValue(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha)
+    console.log(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha);
   }
 
 }
@@ -124,6 +127,10 @@ class mouse {
     this.width = width;
     this.height = height;
     this.mouseScale = mouseScale;
+    this.colorRed = 0;
+    this.colorGreen = 0;
+    this.colorBlue = 0;
+    this.colorAlpha = 0;
   }
 
   init(pattern) {
@@ -134,7 +141,8 @@ class mouse {
   }
 
   draw() {
-    fill('#222222');
+    // fill('#222222');
+    fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
 
     // pattern 1 : Human mouse
     if (mousePattern == "パターン１") {
@@ -167,6 +175,15 @@ class mouse {
     }
     this.mouseScale = value;
   }
+
+  reColor(color) {
+    this.colorRed = color[0];
+    this.colorGreen = color[1];
+    this.colorBlue = color[2];
+    this.colorAlpha = color[3];
+    syncSelectorValue(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha)
+    console.log(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha);
+  }
 }
 
 // .1.c Head
@@ -188,6 +205,7 @@ class head {
 
   draw() {
     fill('#fcfcfc');
+    // fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
 
     // pattern 1 : human face
     if (headPattern == "パターン１") {
@@ -204,7 +222,7 @@ class head {
 
     // pattern 2 : NAO face
     if (headPattern == "パターン２") {
-      fill('#fcfcfc');
+      // fill('#fcfcfc');
       strokeWeight(0);
       rect(canvasX / 2 + 169 * windowScale, 140 * windowScale, 80 * windowScale, 240 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale);
       rect(canvasX / 2 - 251 * windowScale, 140 * windowScale, 80 * windowScale, 240 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale);
@@ -606,6 +624,25 @@ function keyPressed() {
 
 // 2.4 MOOUSE_RELEASED：マウスがリリースされた場合
 function mouseReleased() {
+  // Color Slider
+  var cmRed = document.getElementById("color-model-red").getAttribute("aria-valuenow");
+  var cmBlue = document.getElementById("color-model-blue").getAttribute("aria-valuenow");
+  var cmGreen = document.getElementById("color-model-green").getAttribute("aria-valuenow");
+  var cmAlpha = document.getElementById("color-model-alpha").getAttribute("aria-valuenow");
+  if (selectColorParts == "eye") {
+    leftEye.colorRed = cmRed, rightEye.colorRed = cmRed;
+    leftEye.colorBlue = cmBlue, rightEye.colorBlue = cmBlue;
+    leftEye.colorGreen = cmGreen, rightEye.colorGreen = cmGreen;
+    leftEye.colorAlpha = cmAlpha, rightEye.colorAlpha = cmAlpha;
+  }
+  if (selectColorParts == "mouse") {
+    robotMouse.colorRed = cmRed;
+    robotMouse.colorBlue = cmBlue;
+    robotMouse.colorGreen = cmGreen;
+    robotMouse.colorAlpha = cmAlpha;
+  }
+
+
   // 目のスライドバー
   var eyeSize = document.getElementById("eye-size").getAttribute("aria-valuenow");
   if (eyeSize != leftEye.width) leftEye.resize(eyeSize, "size"), rightEye.resize(eyeSize, "size");
@@ -644,6 +681,58 @@ function mouseDragged() {
 
 
 /*** -- 3. Original functions -- ***/
+/* 
+3.1 COLOR 
+*/
+
+let mdcPalette = {
+  red500: [244, 67, 54, 96],
+  pink500: [233, 30, 99, 91],
+  purple500: [156, 39, 176, 69],
+  deepPurple500: [103, 58, 183, 72],
+  indigo500: [63, 81, 181, 71],
+  blue500: [33, 150, 243, 95],
+  lightBlue500: [3, 169, 244, 96],
+  cyan500: [0, 168, 212, 83],
+  teal500: [0, 150, 136, 59],
+  green500: [76, 175, 80, 69],
+  lightGreen500: [139, 195, 74, 76],
+  lime500: [205, 220, 57, 86],
+  yellow500: [255, 235, 59, 100],
+  amber500: [255, 193, 7, 100],
+  orange500: [255, 152, 0, 100],
+  deepOrange500: [255, 87, 34, 100],
+  brown500: [121, 85, 72, 47],
+  grey500: [158, 158, 158, 62],
+  blueGrey500: [96, 125, 139, 55],
+};
+
+// 
+let selectColorParts = "";
+function changeColor(parts) {
+  selectColorParts = parts;
+  console.log(parts);
+}
+
+function onPalletClick(colorValue) {
+  if (selectColorParts == "eye") {
+    leftEye.reColor(mdcPalette[colorValue]);
+    rightEye.reColor(mdcPalette[colorValue]);
+  }
+  if (selectColorParts == "mouse") {
+    robotMouse.reColor(mdcPalette[colorValue])
+  }
+}
+
+function syncSelectorValue(red, green, blue, alpha) {
+  document.getElementById("color-model-red").setAttribute("now", red + '');
+  document.getElementById("color-model-green").setAttribute("now", green + '');
+  document.getElementById("color-model-blue").setAttribute("now", blue + '');
+  document.getElementById("color-model-alpha").setAttribute("now", alpha + '');
+}
+
+
+
 // SELECT_ELEMENT：移動する要素を選択する関数
 function selectElement(name) {
   if (selected == name) {
@@ -699,24 +788,7 @@ function tabSwiching() {
 }
 
 
-// 
-let selectColorParts = "";
-function changeColor(parts) {
-  selectColorParts = parts;
-  console.log(selectColorParts);
-}
 
-function onPalletClick(colorValue) {
-  if (selectColorParts == "eye") {
-    leftEye.reColor(returnColorModel(colorValue));
-  }
-  console.log(colorValue);
-}
-
-function returnColorModel(colorName) {
-  console.log(colorName);
-  if (colorName == "red-500") return [211, 68, 57];
-}
 
 
 // SEND_MAIL：結果をSMTPサーバーに転送する関数

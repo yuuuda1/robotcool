@@ -41,17 +41,48 @@ mdc.ripple.MDCRipple.attachTo(document.querySelector('.head-button'));
 /* -- 8. Dialogs -- */
 const colorDialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.mdc-dialog'));
 colorDialog.listen('MDCDialog:opened', () => {
-  console.log("open dailog")
-});
-colorDialog.listen('MDCDialog:closed', () => {
-  console.log("close dailog")
-});
-document.querySelector('#color-dialog').addEventListener('click', function (evt) {
-  colorDialog.open();
+  console.log("open dailog");
   cmRed.layout();
   cmGreen.layout();
   cmBlue.layout();
+  cmAlpha.layout();
 });
+// colorDialog.listen('MDCDialog:closed', () => {
+//   console.log("close dailog");
+// });
+
+const elmA = document.querySelectorAll('#color-dialog');
+for (let i = 0; i < elmA.length; i++) {
+  elmA[i].addEventListener('click', () => {
+    colorDialog.open();
+  });
+}
+
+// document.querySelector('#mouse-color-dailog').addEventListener('click', function (evt) {
+//   // colorDialog.open();
+// });
+
+function reloadButton() {
+  var value = document.getElementById("color-model-red").getAttribute("now") - document.getElementById("color-model-red").getAttribute("aria-valuenow");
+  if (value > 0) cmRed.stepUp(value);
+  if (value < 0) cmRed.stepDown(Math.abs(value));
+  red = document.getElementById("color-model-red").getAttribute("now");
+
+  var value = document.getElementById("color-model-green").getAttribute("now") - document.getElementById("color-model-green").getAttribute("aria-valuenow");
+  if (value > 0) cmGreen.stepUp(value);
+  if (value < 0) cmGreen.stepDown(Math.abs(value));
+  green = document.getElementById("color-model-green").getAttribute("now");
+
+  var value = document.getElementById("color-model-blue").getAttribute("now") - document.getElementById("color-model-blue").getAttribute("aria-valuenow");
+  if (value > 0) cmBlue.stepUp(value);
+  if (value < 0) cmBlue.stepDown(Math.abs(value));
+  blue = document.getElementById("color-model-blue").getAttribute("now");
+
+  var value = document.getElementById("color-model-alpha").getAttribute("now") - document.getElementById("color-model-alpha").getAttribute("aria-valuenow");
+  if (value > 0) cmAlpha.stepUp(value);
+  if (value < 0) cmAlpha.stepDown(Math.abs(value));
+  alpha = document.getElementById("color-model-alpha").getAttribute("now");
+}
 
 
 /* -- 17. Sliders -- */
@@ -61,10 +92,13 @@ const cmRed = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-dialog 
 cmRed.listen('MDCSlider:change', () => console.log(`Value changed to ${cmRed.value}`));
 // - Green -
 const cmGreen = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-dialog .color-model-green'));
-cmRed.listen('MDCSlider:change', () => console.log(`Value changed to ${cmGreen.value}`));
+cmGreen.listen('MDCSlider:change', () => console.log(`Value changed to ${cmGreen.value}`));
 // - Blue -
 const cmBlue = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-dialog .color-model-blue'));
-cmRed.listen('MDCSlider:change', () => console.log(`Value changed to ${cmBlue.value}`));
+cmBlue.listen('MDCSlider:change', () => console.log(`Value changed to ${cmBlue.value}`));
+// - Alpha -
+const cmAlpha = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-dialog .color-model-alpha'));
+cmAlpha.listen('MDCSlider:change', () => console.log(`Value changed to ${cmAlpha.value}`));
 
 // - Eye - 
 const eyeSize = mdc.slider.MDCSlider.attachTo(document.querySelector('.eye-size'));
