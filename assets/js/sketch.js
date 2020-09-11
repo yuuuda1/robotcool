@@ -28,10 +28,12 @@
 
 // .1.0 Definition of canvas
 const canvasColor = '#ff980099';
-const canvasX = 600;
-// const canvasX = window.innerWidth - 758;
-const canvasY = 560;
-console.log(window.innerWidth);
+// const canvasX = 600;
+// const canvasY = 560;
+let canvasX = window.innerWidth - 758;
+let canvasY = window.innerHeight - 208;
+
+// console.log(window.innerWidth);
 
 // .1.a Eye
 class eye {
@@ -807,3 +809,7 @@ function sendMail() {
   );
 
 }
+
+window.addEventListener('beforeunload', function (e) {
+  e.returnValue = 'このページから移動しますか？ データ送信せずに移動した際はデータは保存されません';
+}, false);
