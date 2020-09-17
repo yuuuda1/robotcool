@@ -136,6 +136,10 @@ main {
   margin-right: 16px;
 }
 
+.mdc-slider {
+  margin-right: 1rem;
+}
+
 .middle-block {
   position: relative;
   top: 0px;
