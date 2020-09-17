@@ -993,27 +993,6 @@ function tabSwiching() {
   return index;
 }
 
-
-
-
-
-// SEND_MAIL：結果をSMTPサーバーに転送する関数
-function sendMail() {
-  // 氏名とメールアドレス
-  var input_text = document.getElementById("email-text").value;
-
-  Email.send({
-    SecureToken: "d4c96642-e1aa-4be4-aed1-bf2360d5535d",
-    To: 'i2086051@cc.kyoto-su.ac.jp',
-    From: input_text,
-    Subject: "This is the subject",
-    Body: "And this is the body"
-  }).then(
-    message => alert(message)
-  );
-
-}
-
 // window.addEventListener('beforeunload', function (e) {
 //   e.returnValue = 'このページから移動しますか？ データ送信せずに移動した際はデータは保存されません';
 // }, false);
