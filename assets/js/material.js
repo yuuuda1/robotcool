@@ -99,7 +99,7 @@ cmBlue.listen('MDCSlider:change', () => console.log(`Value changed to ${cmBlue.v
 // - Alpha -
 const cmAlpha = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-dialog .color-model-alpha'));
 cmAlpha.listen('MDCSlider:change', () => console.log(`Value changed to ${cmAlpha.value}`));
-
+/* -- 17.2 Head -- */
 // - Eye - 
 const eyeSize = mdc.slider.MDCSlider.attachTo(document.querySelector('.eye-size'));
 eyeSize.listen('MDCSlider:change', () => console.log(`Value changed to ${eyeSize.value}`));
@@ -113,9 +113,27 @@ pupilS.listen('MDCSlider:change', () => console.log(`Value changed to ${pupilS.v
 // - Mouse - 
 const mouseSize = mdc.slider.MDCSlider.attachTo(document.querySelector('.mouse-size'));
 mouseSize.listen('MDCSlider:change', () => console.log(`Value changed to ${mouseSize.value}`));
+
+/* -- 17.2 Body -- */
 // - Head -
 // const headSize = mdc.slider.MDCSlider.attachTo(document.querySelector('.head-size'));
 // mouseSize.listen('MDCSlider:change', () => console.log(`Value changed to ${headSize.value}`));
+// - Neck -
+const neckSize = mdc.slider.MDCSlider.attachTo(document.querySelector('.neck-size'));
+neckSize.listen('MDCSlider:change', () => console.log(`Value changed to ${neckSize.value}`));
+// - Arm -
+const armWidth = mdc.slider.MDCSlider.attachTo(document.querySelector('.arm-width'));
+armWidth.listen('MDCSlider:change', () => console.log(`Value changed to ${armWidth.value}`));
+const armHeight = mdc.slider.MDCSlider.attachTo(document.querySelector('.arm-height'));
+armHeight.listen('MDCSlider:change', () => console.log(`Value changed to ${armHeight.value}`));
+// - Leg -
+const legWidth = mdc.slider.MDCSlider.attachTo(document.querySelector('.leg-width'));
+legWidth.listen('MDCSlider:change', () => console.log(`Value changed to ${legWidth.value}`));
+const legHeight = mdc.slider.MDCSlider.attachTo(document.querySelector('.leg-height'));
+legHeight.listen('MDCSlider:change', () => console.log(`Value changed to ${legHeight.value}`));
+// - Body - 
+const bodySize = mdc.slider.MDCSlider.attachTo(document.querySelector('.body-size'));
+// bodySize.listen('MDCSlider:change', () => console.log(`Value changed to ${bodySize.value}`));
 
 
 /* -- 18. Tabs -- */
@@ -135,3 +153,11 @@ const mouseSelect = new mdc.select.MDCSelect.attachTo(document.querySelector('.m
 const headSelect = new mdc.select.MDCSelect.attachTo(document.querySelector('.head-select'));
 // - Display -
 const displaySlect = new mdc.select.MDCSelect.attachTo(document.querySelector('.display-select'));
+// - Neck -
+const neckSlect = new mdc.select.MDCSelect.attachTo(document.querySelector('.neck-select'));
+// - Arm -
+const arnSlect = new mdc.select.MDCSelect.attachTo(document.querySelector('.arm-select'));
+// - Leg -
+const armSlect = new mdc.select.MDCSelect.attachTo(document.querySelector('.leg-select'));
+// - Body -
+const bodySlect = new mdc.select.MDCSelect.attachTo(document.querySelector('.body-select'));
