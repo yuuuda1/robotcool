@@ -41,7 +41,8 @@
 
   <main>
     <!-- Dialogs -->
-    <div class="mdc-dialog">
+    <!-- Dialogs - material design color -->
+    <div class="mdc-dialog color-dialog">
       <div class="mdc-dialog__container">
         <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
           aria-describedby="my-dialog-content">
@@ -145,6 +146,31 @@
               <a href="javascript:onPalletClick(`grey500`);" class="btn-circle-flat grey-500"></a>
               <a href="javascript:onPalletClick(`blueGrey500`);" class="btn-circle-flat blue-grey-500"></a>
             </div>
+          </div>
+          <div class="mdc-dialog__actions">
+            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">キャンセル</span>
+            </button>
+            <button onclick="reloadButton()" type="button" class="mdc-button mdc-dialog__button">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">リロード</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-dialog__scrim"></div>
+    </div>
+    <!-- Dialogs -  -->
+    <div class="mdc-dialog canvas-dialog">
+      <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+          aria-describedby="my-dialog-content">
+          <h2 class="mdc-dialog__title" id="my-dialog-title">
+            カスタマイズ
+          </h2>
+          <div class="mdc-dialog__content" id="my-dialog-content">
+            <canvas id="canvas4" class="middle-block"></canvas>
           </div>
           <div class="mdc-dialog__actions">
             <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">

@@ -39,13 +39,17 @@ mdc.ripple.MDCRipple.attachTo(document.querySelector('.head-button'));
 
 
 /* -- 8. Dialogs -- */
-const colorDialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.mdc-dialog'));
+const colorDialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.color-dialog'));
 colorDialog.listen('MDCDialog:opened', () => {
-  console.log("open dailog");
+  console.log("mdc dailog");
   cmRed.layout();
   cmGreen.layout();
   cmBlue.layout();
   cmAlpha.layout();
+});
+const canvasDialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.canvas-dialog'));
+canvasDialog.listen('MDCDialog:opened', () => {
+  console.log("canvas dailog");
 });
 // colorDialog.listen('MDCDialog:closed', () => {
 //   console.log("close dailog");
