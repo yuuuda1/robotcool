@@ -240,20 +240,23 @@ class head {
       endShape();
 
 
-      fill('#2196f3');
-      circle(this.cx0, this.cy0, this.cr);
-      circle(this.cx1, this.cy1, this.cr);
-      circle(this.cx2, this.cy2, this.cr);
-      circle(this.cx3, this.cy3, this.cr);
-      circle(this.cx3, this.cy3, this.cr);
-      circle(this.cx4, this.cy4, this.cr);
-      circle(this.cx5, this.cy5, this.cr);
-      circle(this.cx5, this.cy5, this.cr);
-      circle(this.cx6, this.cy6, this.cr);
-      circle(this.cx7, this.cy7, this.cr);
-      circle(this.cx8, this.cy8, this.cr);
-      circle(this.cx9, this.cy9, this.cr);
-      circle(this.cx0, this.cy0, this.cr);
+      if (selected == "head") {
+        fill('#2196f3');
+        circle(this.cx0, this.cy0, this.cr);
+        circle(this.cx1, this.cy1, this.cr);
+        circle(this.cx2, this.cy2, this.cr);
+        circle(this.cx3, this.cy3, this.cr);
+        circle(this.cx3, this.cy3, this.cr);
+        circle(this.cx4, this.cy4, this.cr);
+        circle(this.cx5, this.cy5, this.cr);
+        circle(this.cx5, this.cy5, this.cr);
+        circle(this.cx6, this.cy6, this.cr);
+        circle(this.cx7, this.cy7, this.cr);
+        circle(this.cx8, this.cy8, this.cr);
+        circle(this.cx9, this.cy9, this.cr);
+        circle(this.cx0, this.cy0, this.cr);
+      }
+
       fill('#fff');
       strokeWeight(1);
     }

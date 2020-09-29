@@ -35,6 +35,12 @@ Ex. Colors
   margin-right: 0.5rem;
 }
 
+/* 4. Buttons: icon button */
+.mdc-icon-button {
+  /* color: #2196f3 !important; */
+  /* background-color: #2196f3; */
+}
+
 /* -- 8. Dialogs -- */
 .mdc-dialog__surface {
   width: 480px;
