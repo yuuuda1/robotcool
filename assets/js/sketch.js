@@ -240,20 +240,23 @@ class head {
       endShape();
 
 
-      fill('#2196f3');
-      circle(this.cx0, this.cy0, this.cr);
-      circle(this.cx1, this.cy1, this.cr);
-      circle(this.cx2, this.cy2, this.cr);
-      circle(this.cx3, this.cy3, this.cr);
-      circle(this.cx3, this.cy3, this.cr);
-      circle(this.cx4, this.cy4, this.cr);
-      circle(this.cx5, this.cy5, this.cr);
-      circle(this.cx5, this.cy5, this.cr);
-      circle(this.cx6, this.cy6, this.cr);
-      circle(this.cx7, this.cy7, this.cr);
-      circle(this.cx8, this.cy8, this.cr);
-      circle(this.cx9, this.cy9, this.cr);
-      circle(this.cx0, this.cy0, this.cr);
+      if (selected == "head") {
+        fill('#2196f3');
+        circle(this.cx0, this.cy0, this.cr);
+        circle(this.cx1, this.cy1, this.cr);
+        circle(this.cx2, this.cy2, this.cr);
+        circle(this.cx3, this.cy3, this.cr);
+        circle(this.cx3, this.cy3, this.cr);
+        circle(this.cx4, this.cy4, this.cr);
+        circle(this.cx5, this.cy5, this.cr);
+        circle(this.cx5, this.cy5, this.cr);
+        circle(this.cx6, this.cy6, this.cr);
+        circle(this.cx7, this.cy7, this.cr);
+        circle(this.cx8, this.cy8, this.cr);
+        circle(this.cx9, this.cy9, this.cr);
+        circle(this.cx0, this.cy0, this.cr);
+      }
+
       fill('#fff');
       strokeWeight(1);
     }
@@ -903,68 +906,71 @@ function mouseDragged() {
     controlPoint();
   }
 
-  controlPoint();
+  // controlPoint();
 }
 
+// 制御点の変更を行う関数
 function controlPoint() {
-  if ((mouseX <= robotHead.cx0 + 10) && ((mouseX >= robotHead.cx0 - 10))) {
-    if ((mouseY <= robotHead.cy0 + 10) && ((mouseY >= robotHead.cy0 - 10))) {
-      robotHead.cy0 = mouseY;
+  if (selected == "head") {
+    if ((mouseX <= robotHead.cx0 + 10) && ((mouseX >= robotHead.cx0 - 10))) {
+      if ((mouseY <= robotHead.cy0 + 10) && ((mouseY >= robotHead.cy0 - 10))) {
+        robotHead.cy0 = mouseY;
+      }
+    }
+    if ((mouseX <= robotHead.cx1 + 10) && ((mouseX >= robotHead.cx1 - 10))) {
+      if ((mouseY <= robotHead.cy1 + 10) && ((mouseY >= robotHead.cy1 - 10))) {
+        robotHead.cx1 = mouseX, robotHead.cy1 = mouseY;
+        robotHead.cx9 = centerX - (mouseX - centerX), robotHead.cy9 = mouseY;
+      }
+    }
+    if ((mouseX <= robotHead.cx2 + 10) && ((mouseX >= robotHead.cx2 - 10))) {
+      if ((mouseY <= robotHead.cy2 + 10) && ((mouseY >= robotHead.cy2 - 10))) {
+        robotHead.cx2 = mouseX, robotHead.cy2 = mouseY;
+        robotHead.cx8 = centerX - (mouseX - centerX), robotHead.cy8 = mouseY;
+      }
+    }
+    if ((mouseX <= robotHead.cx3 + 10) && ((mouseX >= robotHead.cx3 - 10))) {
+      if ((mouseY <= robotHead.cy3 + 10) && ((mouseY >= robotHead.cy3 - 10))) {
+        robotHead.cx3 = mouseX, robotHead.cy3 = mouseY;
+        robotHead.cx7 = centerX - (mouseX - centerX), robotHead.cy7 = mouseY;
+      }
+    }
+    if ((mouseX <= robotHead.cx4 + 10) && ((mouseX >= robotHead.cx4 - 10))) {
+      if ((mouseY <= robotHead.cy4 + 10) && ((mouseY >= robotHead.cy4 - 10))) {
+        robotHead.cx4 = mouseX, robotHead.cy4 = mouseY;
+        robotHead.cx6 = centerX - (mouseX - centerX), robotHead.cy6 = mouseY;
+      }
+    }
+    if ((mouseX <= robotHead.cx5 + 10) && ((mouseX >= robotHead.cx5 - 10))) {
+      if ((mouseY <= robotHead.cy5 + 10) && ((mouseY >= robotHead.cy5 - 10))) {
+        robotHead.cy5 = mouseY;
+      }
+    }
+    if ((mouseX <= robotHead.cx9 + 10) && ((mouseX >= robotHead.cx9 - 10))) {
+      if ((mouseY <= robotHead.cy9 + 10) && ((mouseY >= robotHead.cy9 - 10))) {
+        robotHead.cx9 = mouseX, robotHead.cy9 = mouseY;
+        robotHead.cx1 = centerX - (mouseX - centerX), robotHead.cy1 = mouseY;
+      }
+    }
+    if ((mouseX <= robotHead.cx8 + 10) && ((mouseX >= robotHead.cx8 - 10))) {
+      if ((mouseY <= robotHead.cy8 + 10) && ((mouseY >= robotHead.cy8 - 10))) {
+        robotHead.cx8 = mouseX, robotHead.cy8 = mouseY;
+        robotHead.cx2 = centerX - (mouseX - centerX), robotHead.cy2 = mouseY;
+      }
+    }
+    if ((mouseX <= robotHead.cx7 + 10) && ((mouseX >= robotHead.cx7 - 10))) {
+      if ((mouseY <= robotHead.cy7 + 10) && ((mouseY >= robotHead.cy7 - 10))) {
+        robotHead.cx7 = mouseX, robotHead.cy7 = mouseY;
+        robotHead.cx3 = centerX - (mouseX - centerX), robotHead.cy3 = mouseY;
+      }
+    }
+    if ((mouseX <= robotHead.cx6 + 10) && ((mouseX >= robotHead.cx6 - 10))) {
+      if ((mouseY <= robotHead.cy6 + 10) && ((mouseY >= robotHead.cy6 - 10))) {
+        robotHead.cx6 = mouseX, robotHead.cy6 = mouseY;
+        robotHead.cx4 = centerX - (mouseX - centerX), robotHead.cy4 = mouseY;
+      }
     }
   }
-  if ((mouseX <= robotHead.cx1 + 10) && ((mouseX >= robotHead.cx1 - 10))) {
-    if ((mouseY <= robotHead.cy1 + 10) && ((mouseY >= robotHead.cy1 - 10))) {
-      robotHead.cx1 = mouseX, robotHead.cy1 = mouseY;
-      robotHead.cx9 = centerX - (mouseX - centerX), robotHead.cy9 = mouseY;
-    }
-  }
-  if ((mouseX <= robotHead.cx2 + 10) && ((mouseX >= robotHead.cx2 - 10))) {
-    if ((mouseY <= robotHead.cy2 + 10) && ((mouseY >= robotHead.cy2 - 10))) {
-      robotHead.cx2 = mouseX, robotHead.cy2 = mouseY;
-      robotHead.cx8 = centerX - (mouseX - centerX), robotHead.cy8 = mouseY;
-    }
-  }
-  if ((mouseX <= robotHead.cx3 + 10) && ((mouseX >= robotHead.cx3 - 10))) {
-    if ((mouseY <= robotHead.cy3 + 10) && ((mouseY >= robotHead.cy3 - 10))) {
-      robotHead.cx3 = mouseX, robotHead.cy3 = mouseY;
-      robotHead.cx7 = centerX - (mouseX - centerX), robotHead.cy7 = mouseY;
-    }
-  }
-  if ((mouseX <= robotHead.cx4 + 10) && ((mouseX >= robotHead.cx4 - 10))) {
-    if ((mouseY <= robotHead.cy4 + 10) && ((mouseY >= robotHead.cy4 - 10))) {
-      robotHead.cx4 = mouseX, robotHead.cy4 = mouseY;
-      robotHead.cx6 = centerX - (mouseX - centerX), robotHead.cy6 = mouseY;
-    }
-  }
-  if ((mouseX <= robotHead.cx5 + 10) && ((mouseX >= robotHead.cx5 - 10))) {
-    if ((mouseY <= robotHead.cy5 + 10) && ((mouseY >= robotHead.cy5 - 10))) {
-      robotHead.cy5 = mouseY;
-    }
-  }
-  // if ((mouseX <= robotHead.cx9 + 10) && ((mouseX >= robotHead.cx9 - 10))) {
-  //   if ((mouseY <= robotHead.cy9 + 10) && ((mouseY >= robotHead.cy9 - 10))) {
-  //     robotHead.cx1 = mouseX, robotHead.cy1 = mouseY;
-  //     robotHead.cx9 = centerX - (mouseX - centerX), robotHead.cy9 = mouseY;
-  //   }
-  // }
-  // if ((mouseX <= robotHead.cx8 + 10) && ((mouseX >= robotHead.cx8 - 10))) {
-  //   if ((mouseY <= robotHead.cy8 + 10) && ((mouseY >= robotHead.cy8 - 10))) {
-  //     robotHead.cx2 = mouseX, robotHead.cy2 = mouseY;
-  //     robotHead.cx8 = centerX - (mouseX - centerX), robotHead.cy8 = mouseY;
-  //   }
-  // }
-  // if ((mouseX <= robotHead.cx7 + 10) && ((mouseX >= robotHead.cx7 - 10))) {
-  //   if ((mouseY <= robotHead.cy7 + 10) && ((mouseY >= robotHead.cy7 - 10))) {
-  //     robotHead.cx3 = mouseX, robotHead.cy3 = mouseY;
-  //     robotHead.cx7 = centerX - (mouseX - centerX), robotHead.cy7 = mouseY;
-  //   }
-  // }
-  // if ((mouseX <= robotHead.cx6 + 10) && ((mouseX >= robotHead.cx6 - 10))) {
-  //   if ((mouseY <= robotHead.cy6 + 10) && ((mouseY >= robotHead.cy6 - 10))) {
-  //     robotHead.cx4 = mouseX, robotHead.cy4 = mouseY;
-  //     robotHead.cx6 = centerX - (mouseX - centerX), robotHead.cy6 = mouseY;
-  //   }
-  // }
 }
 
 
@@ -1032,6 +1038,7 @@ function selectElement(name) {
   } else {
     selected = name;
   }
+  // console.log(name);
 }
 
 // CHANGE_SELECT
@@ -1099,6 +1106,10 @@ function tabSwiching() {
 
   return index;
 }
+
+
+// 
+
 
 // window.addEventListener('beforeunload', function (e) {
 //   e.returnValue = 'このページから移動しますか？ データ送信せずに移動した際はデータは保存されません';
