@@ -36,6 +36,10 @@ main {
   display: none;
 }
 
+.secondary {
+  color: #2196f3 !important;
+}
+
 
 /* -- 2. Depending on the class -- */
 

@@ -39,7 +39,7 @@ mdc.ripple.MDCRipple.attachTo(document.querySelector('.head-button'));
 
 
 /* -- 4. Buttons: icon button -- */
-// - head -
+// - head - 
 const iconButtonRipple = new mdc.ripple.MDCRipple(document.querySelector('.head-edit-icons'));
 iconButtonRipple.unbounded = true;
 
@@ -53,10 +53,10 @@ colorDialog.listen('MDCDialog:opened', () => {
   cmBlue.layout();
   cmAlpha.layout();
 });
-const canvasDialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.canvas-dialog'));
-canvasDialog.listen('MDCDialog:opened', () => {
-  console.log("canvas dailog");
-});
+// const canvasDialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.canvas-dialog'));
+// canvasDialog.listen('MDCDialog:opened', () => {
+//   console.log("canvas dailog");
+// });
 // colorDialog.listen('MDCDialog:closed', () => {
 //   console.log("close dailog");
 // });

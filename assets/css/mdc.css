@@ -35,9 +35,10 @@ Ex. Colors
   margin-right: 0.5rem;
 }
 
-/* -- 4. Buttons: icon button -- */
-.head-edit-icons {
-  color: #2196f3 !important;
+/* 4. Buttons: icon button */
+.mdc-icon-button {
+  /* color: #2196f3 !important; */
+  /* background-color: #2196f3; */
 }
 
 /* -- 8. Dialogs -- */
