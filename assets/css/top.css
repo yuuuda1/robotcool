@@ -36,8 +36,9 @@ main {
   display: none;
 }
 
-.secondary {
+.edit-icon-button {
   color: #2196f3 !important;
+  margin-left: -0.5rem;
 }
 
 

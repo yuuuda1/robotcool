@@ -161,31 +161,6 @@
       </div>
       <div class="mdc-dialog__scrim"></div>
     </div>
-    <!-- Dialogs -  -->
-    <!-- <div class="mdc-dialog canvas-dialog">
-      <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
-          aria-describedby="my-dialog-content">
-          <h2 class="mdc-dialog__title" id="my-dialog-title">
-            カスタマイズ
-          </h2>
-          <div class="mdc-dialog__content" id="my-dialog-content">
-            <canvas id="canvas4" class="middle-block"></canvas>
-          </div>
-          <div class="mdc-dialog__actions">
-            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
-              <div class="mdc-button__ripple"></div>
-              <span class="mdc-button__label">キャンセル</span>
-            </button>
-            <button onclick="reloadButton()" type="button" class="mdc-button mdc-dialog__button">
-              <div class="mdc-button__ripple"></div>
-              <span class="mdc-button__label">リロード</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="mdc-dialog__scrim"></div>
-    </div> -->
 
     <!-- main content -->
     <div class="paper-container">
@@ -272,14 +247,10 @@
                     </ul>
                   </div>
                 </div>
-                <button class="mdc-button mdc-button--outlined eye-button" onclick="selectElement(`eye`)">
-                  <div class="mdc-button__ripple"></div>
-                  <span class="mdc-button__label">移動</span>
-                </button>
-                <button onclick="changeColor(`eye`)" id="color-dialog" class="mdc-button mdc-button--outlined">
-                  <div class="mdc-button__ripple"></div>
-                  <span class="mdc-button__label">色</span>
-                </button>
+                <button class="mdc-icon-button material-icons edit-icon-button" onclick="changeColor(`eye`)"
+                  id="color-dialog">color_lens</button>
+                <button class="mdc-icon-button material-icons head-edit-icons edit-icon-button"
+                  onclick="selectElement(`eye`)">control_camera</button>
               </div>
               <div class="row-2">
                 <div class="eye-size-block">
@@ -388,14 +359,12 @@
                     </ul>
                   </div>
                 </div>
-                <button class="mdc-button mdc-button--outlined mouse-button" onclick="selectElement(`mouse`)">
-                  <div class="mdc-button__ripple"></div>
-                  <span class="mdc-button__label">移動</span>
-                </button>
-                <button onclick="changeColor(`mouse`)" id="color-dialog" class="mdc-button mdc-button--outlined">
-                  <div class="mdc-button__ripple"></div>
-                  <span class="mdc-button__label">色</span>
-                </button>
+                <!-- <button class="mdc-icon-button material-icons head-edit-icons edit-icon-button"
+                  onclick="selectElement(`mouse`)">edit</button> -->
+                <button class="mdc-icon-button material-icons edit-icon-button" onclick="changeColor(`mouse`)"
+                  id="color-dialog">color_lens</button>
+                <button class="mdc-icon-button material-icons edit-icon-button"
+                  onclick="selectElement(`mouse`)">control_camera</button>
               </div>
               <div class="row-2">
                 <div class="eye-size-block">
@@ -459,8 +428,11 @@
                     </ul>
                   </div>
                 </div>
-                <button class="mdc-icon-button material-icons head-edit-icons secondary"
+                <button class="mdc-icon-button material-icons head-edit-icons edit-icon-button"
                   onclick="selectElement(`head`)">edit</button>
+                <button class="mdc-icon-button material-icons edit-icon-button" onclick="changeColor(``)"
+                  id="color-dialog">color_lens</button>
+                <button class="mdc-icon-button material-icons edit-icon-button">control_camera</button>
               </div>
               <div class="row-2">
               </div>

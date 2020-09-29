@@ -31,7 +31,7 @@ const topAppBar = mdc.topAppBar.MDCTopAppBar.attachTo(topAppBarElement);
 
 /* -- 2. Buttons -- */
 // - Eye - 
-mdc.ripple.MDCRipple.attachTo(document.querySelector('.eye-button'));
+// mdc.ripple.MDCRipple.attachTo(document.querySelector('.eye-button'));
 // - Mouse - 
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.mouse-button'));
 // - head - 
