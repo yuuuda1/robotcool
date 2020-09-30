@@ -28,8 +28,6 @@
 
 // .1.0 Definition of canvas
 const canvasColor = '#ff980099';
-// const canvasX = 600;
-// const canvasY = 560;
 let canvasX = window.innerWidth - 758;
 let canvasY = window.innerHeight - 208;
 
@@ -146,7 +144,6 @@ class mouse {
   }
 
   draw() {
-    // fill('#222222');
     fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
 
     // pattern 1 : Human mouse
@@ -200,36 +197,43 @@ class head {
     this.height = height;
     this.headRd = headRd;
     this.headScale = 1.0;
-    // pattern 1 : human face
-    this.amp = 200;
-    this.cr = 20 * windowScale;
-    this.cx0 = centerX, this.cy0 = (this.y + 20) * windowScale;
-    this.cx1 = centerX + (this.amp + 20) * windowScale, this.cy1 = (this.y + 40) * windowScale;
-    this.cx2 = centerX + (this.amp) * windowScale, this.cy2 = (this.y + 180) * windowScale;
-    this.cx3 = centerX + (this.amp) * windowScale, this.cy3 = (this.y + 260) * windowScale;
-    this.cx4 = centerX + (this.amp) * windowScale, this.cy4 = (this.y + 440) * windowScale;
-    this.cx5 = centerX, this.cy5 = (this.y + 500) * windowScale;
-    this.cx6 = centerX - (this.amp) * windowScale, this.cy6 = (this.y + 440) * windowScale;
-    this.cx7 = centerX - (this.amp) * windowScale, this.cy7 = (this.y + 260) * windowScale;
-    this.cx8 = centerX - (this.amp) * windowScale, this.cy8 = (this.y + 180) * windowScale;
-    this.cx9 = centerX - (this.amp + 20) * windowScale, this.cy9 = (this.y + 40) * windowScale;
+    this.colorRed = 0, this.colorGreen = 0, this.colorBlue = 0, this.colorAlpha = 100;
+
+    this.amp = 0;
+    this.cr = 0;
+    this.cx0 = 0, this.cx1 = 0, this.cx2 = 0, this.cx3 = 0, this.cx4 = 0, this.cx5 = 0, this.cx6 = 0, this.cx7 = 0, this.cx8 = 0, this.cx9 = 0;
   }
 
-  init(pattern) {
-    if (pattern == "パターン１");
-    if (pattern == "パターン２");
-    if (pattern == "パターン３");
-    headPattern = pattern;
+  init(pattern, tabNum) {
+    if ((headPattern != pattern) || (tabNum == 2)) {
+      if (pattern == "");
+      if (pattern == "パターン１") {
+        this.amp = 200;
+        this.cr = 20 * windowScale;
+        this.cx0 = centerX, this.cy0 = (this.y + 20) * windowScale;
+        this.cx1 = centerX + (this.amp + 20) * windowScale, this.cy1 = (this.y + 40) * windowScale;
+        this.cx2 = centerX + (this.amp) * windowScale, this.cy2 = (this.y + 180) * windowScale;
+        this.cx3 = centerX + (this.amp) * windowScale, this.cy3 = (this.y + 260) * windowScale;
+        this.cx4 = centerX + (this.amp) * windowScale, this.cy4 = (this.y + 440) * windowScale;
+        this.cx5 = centerX, this.cy5 = (this.y + 500) * windowScale;
+        this.cx6 = centerX - (this.amp) * windowScale, this.cy6 = (this.y + 440) * windowScale;
+        this.cx7 = centerX - (this.amp) * windowScale, this.cy7 = (this.y + 260) * windowScale;
+        this.cx8 = centerX - (this.amp) * windowScale, this.cy8 = (this.y + 180) * windowScale;
+        this.cx9 = centerX - (this.amp + 20) * windowScale, this.cy9 = (this.y + 40) * windowScale;
+        console.log("hogehoge");
+      };
+      if (pattern == "パターン２");
+      if (pattern == "パターン３");
+      headPattern = pattern;
+    }
   }
 
   draw() {
-    fill('#fcfcfc');
-    // fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
+    // fill('#fcfcfc');
+    fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
 
     if (headPattern == "") {
-      // strokeWeight(0);
-      // circle(this.x, this.y + this.width / (3 / 2) * windowScale, this.width * windowScale);
-      // strokeWeight(1);
+      // pattern 1 : human face
       strokeWeight(0);
       beginShape();
       vertex(this.cx0, this.cy0);
@@ -238,7 +242,6 @@ class head {
       bezierVertex(this.cx5, this.cy5, this.cx6, this.cy6, this.cx7, this.cy7);
       bezierVertex(this.cx8, this.cy8, this.cx9, this.cy9, this.cx0, this.cy0);
       endShape();
-
 
       if (selected == "head") {
         fill('#2196f3');
@@ -260,29 +263,36 @@ class head {
       fill('#fff');
       strokeWeight(1);
     }
+
     // pattern 1 : human face
     if (headPattern == "パターン１") {
       strokeWeight(0);
       beginShape();
       vertex(this.cx0, this.cy0);
-      circle(this.cx0, this.cy0, this.cr);
       bezierVertex(this.cx1, this.cy1, this.cx2, this.cy2, this.cx3, this.cy3);
-      circle(this.cx1, this.cy1, this.cr);
-      circle(this.cx2, this.cy2, this.cr);
-      circle(this.cx3, this.cy3, this.cr);
       bezierVertex(this.cx3, this.cy3, this.cx4, this.cy4, this.cx5, this.cy5);
-      circle(this.cx3, this.cy3, this.cr);
-      circle(this.cx4, this.cy4, this.cr);
-      circle(this.cx5, this.cy5, this.cr);
       bezierVertex(this.cx5, this.cy5, this.cx6, this.cy6, this.cx7, this.cy7);
-      circle(this.cx5, this.cy5, this.cr);
-      circle(this.cx6, this.cy6, this.cr);
-      circle(this.cx7, this.cy7, this.cr);
       bezierVertex(this.cx8, this.cy8, this.cx9, this.cy9, this.cx0, this.cy0);
-      circle(this.cx8, this.cy8, this.cr);
-      circle(this.cx9, this.cy9, this.cr);
-      circle(this.cx0, this.cy0, this.cr);
       endShape();
+
+      if (selected == "head") {
+        fill('#2196f3');
+        circle(this.cx0, this.cy0, this.cr);
+        circle(this.cx1, this.cy1, this.cr);
+        circle(this.cx2, this.cy2, this.cr);
+        circle(this.cx3, this.cy3, this.cr);
+        circle(this.cx3, this.cy3, this.cr);
+        circle(this.cx4, this.cy4, this.cr);
+        circle(this.cx5, this.cy5, this.cr);
+        circle(this.cx5, this.cy5, this.cr);
+        circle(this.cx6, this.cy6, this.cr);
+        circle(this.cx7, this.cy7, this.cr);
+        circle(this.cx8, this.cy8, this.cr);
+        circle(this.cx9, this.cy9, this.cr);
+        circle(this.cx0, this.cy0, this.cr);
+      }
+
+      fill('#fff');
       strokeWeight(1);
     }
 
@@ -312,6 +322,15 @@ class head {
     if (direction == "up") this.y -= 10;
     if (direction == "down") this.y += 10;
   }
+
+  reColor(color) {
+    this.colorRed = color[0];
+    this.colorGreen = color[1];
+    this.colorBlue = color[2];
+    this.colorAlpha = color[3];
+    syncSelectorValue(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha)
+    console.log(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha);
+  }
 }
 
 // .1.d display
@@ -322,6 +341,7 @@ class display {
     this.width = width;
     this.height = height;
     this.radius = radius;
+    this.colorRed = 0, this.colorGreen = 0, this.colorBlue = 0, this.colorAlpha = 100;
   }
 
   init(pattern) {
@@ -664,7 +684,6 @@ let rightLeg = new leg(canvasX / 2 + 40, 1080, 56, 220, "right");
 let selected = "";
 
 
-
 /*** -- 2. function of p5.js -- ***/
 /* 
 2.1 setup() 
@@ -679,9 +698,6 @@ let cnvs; // Creating a Canvas
 // 2.1 SETUP：最初に１回だけ(初期化)
 function setup() {
   cnvs = createCanvas(canvasX, canvasY); // Creating a Canvas
-  // let cnvs = createCanvas(canvasX, canvasY); // Creating a Canvas
-  // cnvs.parent('canvas'); // 親要素の変更
-  // rectMode(CENTER);
 }
 
 // 2.2 DRAW：setup後に繰り返し実行（フレーム単位）
@@ -690,7 +706,6 @@ function draw() {
 
   clear();
   background(canvasColor);
-  // cnvs.parent('canvas4');
 
   // Depiction of the head
   if (tabNum == 1) {
@@ -714,7 +729,7 @@ function draw() {
 
     robotNeck.draw();
 
-
+    robotHead.init(headPattern, 2);
     robotHead.draw();
     robotDisplay.draw();
     robotMouse.draw();
@@ -849,6 +864,12 @@ function mouseReleased() {
     robotNeck.colorGreen = cmGreen;
     robotNeck.colorAlpha = cmAlpha;
   }
+  if (selectColorParts == "head") {
+    robotHead.colorRed = cmRed;
+    robotHead.colorBlue = cmBlue;
+    robotHead.colorGreen = cmGreen;
+    robotHead.colorAlpha = cmAlpha;
+  }
 
 
   // 目のスライドバー
@@ -911,6 +932,7 @@ function mouseDragged() {
 
 // 制御点の変更を行う関数
 function controlPoint() {
+  // console.log(robotHead.cx0);
   if (selected == "head") {
     if ((mouseX <= robotHead.cx0 + 10) && ((mouseX >= robotHead.cx0 - 10))) {
       if ((mouseY <= robotHead.cy0 + 10) && ((mouseY >= robotHead.cy0 - 10))) {
@@ -1020,6 +1042,9 @@ function onPalletClick(colorValue) {
   if (selectColorParts == "neck") {
     robotNeck.reColor(mdcPalette[colorValue])
   }
+  if (selectColorParts == "head") {
+    robotHead.reColor(mdcPalette[colorValue])
+  }
 }
 
 function syncSelectorValue(red, green, blue, alpha) {
@@ -1070,7 +1095,8 @@ function changedPattern(pattern, element) {
   // Mouse
   if (element == "mouse") mousePattern = pattern;
   // Head
-  if (element == "head") headPattern = pattern;
+  if (element == "head") robotHead.init(pattern);
+  // if (element == "head") headPattern = pattern;
   // Display
   if (element == "display") displayPattern = pattern;
   // - Body - 
