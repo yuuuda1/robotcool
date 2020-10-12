@@ -130,10 +130,10 @@ class mouse {
     this.width = width;
     this.height = height;
     this.mouseScale = mouseScale;
-    this.colorRed = 0;
-    this.colorGreen = 0;
-    this.colorBlue = 0;
-    this.colorAlpha = 0;
+    this.colorRed = 255;
+    this.colorGreen = 255;
+    this.colorBlue = 255;
+    this.colorAlpha = 100;
   }
 
   init(pattern) {
@@ -145,6 +145,10 @@ class mouse {
 
   draw() {
     fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
+
+    if (mousePattern == "") {
+      arc(canvasX / 2, this.y * windowScale, this.width * 2 * windowScale, this.height * 2 * windowScale, 0, PI, PIE);
+    }
 
     // pattern 1 : Human mouse
     if (mousePattern == "パターン１") {
@@ -197,7 +201,7 @@ class head {
     this.height = height;
     this.headRd = headRd;
     this.headScale = 1.0;
-    this.colorRed = 0, this.colorGreen = 0, this.colorBlue = 0, this.colorAlpha = 100;
+    this.colorRed = 255, this.colorGreen = 255, this.colorBlue = 255, this.colorAlpha = 100;
 
     this.amp = 0;
     this.cr = 0;
@@ -229,38 +233,12 @@ class head {
   }
 
   draw() {
-    // fill('#fcfcfc');
     fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
 
+    // pattern 0 : no selected
     if (headPattern == "") {
-      // pattern 1 : human face
       strokeWeight(0);
-      beginShape();
-      vertex(this.cx0, this.cy0);
-      bezierVertex(this.cx1, this.cy1, this.cx2, this.cy2, this.cx3, this.cy3);
-      bezierVertex(this.cx3, this.cy3, this.cx4, this.cy4, this.cx5, this.cy5);
-      bezierVertex(this.cx5, this.cy5, this.cx6, this.cy6, this.cx7, this.cy7);
-      bezierVertex(this.cx8, this.cy8, this.cx9, this.cy9, this.cx0, this.cy0);
-      endShape();
-
-      if (selected == "head") {
-        fill('#2196f3');
-        circle(this.cx0, this.cy0, this.cr);
-        circle(this.cx1, this.cy1, this.cr);
-        circle(this.cx2, this.cy2, this.cr);
-        circle(this.cx3, this.cy3, this.cr);
-        circle(this.cx3, this.cy3, this.cr);
-        circle(this.cx4, this.cy4, this.cr);
-        circle(this.cx5, this.cy5, this.cr);
-        circle(this.cx5, this.cy5, this.cr);
-        circle(this.cx6, this.cy6, this.cr);
-        circle(this.cx7, this.cy7, this.cr);
-        circle(this.cx8, this.cy8, this.cr);
-        circle(this.cx9, this.cy9, this.cr);
-        circle(this.cx0, this.cy0, this.cr);
-      }
-
-      fill('#fff');
+      circle(centerX, (centerY - 80) * windowScale, 400 * windowScale);
       strokeWeight(1);
     }
 
