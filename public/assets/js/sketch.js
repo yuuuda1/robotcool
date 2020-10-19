@@ -7,6 +7,8 @@
 
 /*** -- 1. Class definition -- ***/
 /* 
+1.0 Foundation
+ .1 canvas
 1.1 HEAD
  .1.0 definition of canvas
  .1.a eye
@@ -24,40 +26,38 @@
 */
 
 
+/* -- 1.0 Foundation -- */
+// -- x.1.1 canvas / キャンバス
+let cnvsColor = '#ff980099';           // 色
+let cnvsW = window.innerWidth - 796;   // 横幅(width)
+let cnvsH = window.innerHeight - 208;  // 縦幅(height)
+const ctrX = cnvsW / 2;                // 中央のX座標
+const ctrY = cnvsH / 2;                // 中央のY座標
+
+
 /* -- 1.1 HEAD -- */
-
-// .1.0 Definition of canvas
-const canvasColor = '#ff980099';
-let canvasX = window.innerWidth - 758;
-let canvasY = window.innerHeight - 208;
-
-const centerX = canvasX / 2;
-const centerY = canvasY / 2;
-
-// console.log(window.innerWidth);
-
-// .1.a Eye
+// -- x.1.a Eye / 目
 class eye {
-  constructor(x, y, width, height, eyeScale, lor) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.eyeScale = eyeScale;
-    this.widthScale = 1;
-    this.heightScale = 1;
-    this.pupilScale = 0.5;
-    this.colorRed = 0;
-    this.colorGreen = 0;
-    this.colorBlue = 0;
-    this.colorAlpha = 0;
-    this.lor = lor;     // Light or Right
+  constructor(x, y, width, height, scale, lor) {
+    this.x = x;             // X座標
+    this.y = y;             // Y座標
+    this.width = width;     // 横幅(width)
+    this.height = height;   // 縦幅(height)
+    this.scale = scale;     // 全体のスケール
+    this.widthScale = 1;    // 横幅のスケール
+    this.heightScale = 1;   // 縦幅のスケール
+    this.pupilScale = 0.5;  // 瞳孔のスケール
+    this.colorRed = 0;      // 赤色のGBR値
+    this.colorGreen = 0;    // 緑色のGBR値
+    this.colorBlue = 0;     // 青色のGBR値
+    this.colorAlpha = 0;    // アルファ値
+    this.lor = lor;         // 右か左か
   }
 
   init(pattern) {
-    if (pattern == "パターン１") rightEye = new eye(canvasX / 2 - 100, 260, 50, 50, 1.0, "rightEye"), leftEye = new eye(canvasX / 2 + 100, 260, 50, 50, 1.0, "leftEye");
-    if (pattern == "パターン２") rightEye = new eye(canvasX / 2 - 100, 260, 60, 50, 1.0, "rightEye"), leftEye = new eye(canvasX / 2 + 100, 260, 60, 50, 1.0, "leftEye");
-    if (pattern == "パターン３") rightEye = new eye(canvasX / 2 - 100, 260, 50, 68, 1.0, "rightEye"), leftEye = new eye(canvasX / 2 + 100, 260, 50, 68, 1.0, "leftEye");
+    if (pattern == "パターン１") rightEye = new eye(cnvsW / 2 - 100, 260, 50, 50, 1.0, "rightEye"), leftEye = new eye(cnvsW / 2 + 100, 260, 50, 50, 1.0, "leftEye");
+    if (pattern == "パターン２") rightEye = new eye(cnvsW / 2 - 100, 260, 60, 50, 1.0, "rightEye"), leftEye = new eye(cnvsW / 2 + 100, 260, 60, 50, 1.0, "leftEye");
+    if (pattern == "パターン３") rightEye = new eye(cnvsW / 2 - 100, 260, 50, 68, 1.0, "rightEye"), leftEye = new eye(cnvsW / 2 + 100, 260, 50, 68, 1.0, "leftEye");
     eyePattern = pattern;
   }
 
@@ -70,8 +70,8 @@ class eye {
       ellipse(this.x, this.y, this.width * this.pupilScale, this.height * this.pupilScale);
     }
     if ((tabNum == 2) || (tabNum == 3)) {
-      if (this.x < canvasX / 2) var x = this.x + (canvasX / 2 - this.x) * (1.0 - windowScale);
-      if (this.x > canvasX / 2) var x = this.x - (this.x - canvasX / 2) * (1.0 - windowScale);
+      if (this.x < cnvsW / 2) var x = this.x + (cnvsW / 2 - this.x) * (1.0 - windowScale);
+      if (this.x > cnvsW / 2) var x = this.x - (this.x - cnvsW / 2) * (1.0 - windowScale);
       fill('#FFF'); // Eye
       ellipse(x, this.y * windowScale, this.width * windowScale, this.height * windowScale);
       // fill('#222222'); // Pupil
@@ -101,9 +101,9 @@ class eye {
       this.height = this.height * value / this.heightScale;
       this.heightScale = value;
     } else if (direction == "size") {
-      this.width = this.width * value / this.eyeScale;
-      this.height = this.height * value / this.eyeScale;
-      this.eyeScale = value;
+      this.width = this.width * value / this.scale;
+      this.height = this.height * value / this.scale;
+      this.scale = value;
     }
   }
 
@@ -119,7 +119,6 @@ class eye {
     syncSelectorValue(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha)
     console.log(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha);
   }
-
 }
 
 // .1.b Mouse
@@ -129,11 +128,19 @@ class mouse {
     this.y = y;
     this.width = width;
     this.height = height;
+    this.widthScale = 1;
+    this.heightScale = 1;
     this.mouseScale = mouseScale;
-    this.colorRed = 255;
-    this.colorGreen = 255;
-    this.colorBlue = 255;
-    this.colorAlpha = 100;
+    this.colorRed = 255,
+      this.colorGreen = 255,
+      this.colorBlue = 255,
+      this.colorAlpha = 100;
+    this.cr = 12;
+    this.cx0 = ctrX + this.width * windowScale, this.cy0 = this.y * windowScale,
+      this.cx1 = ctrX + this.width * windowScale, this.cy1 = this.y + this.height * windowScale,
+      this.cx2 = ctrX * windowScale, this.cy2 = this.y + this.height * windowScale,
+      this.cx3 = ctrX - this.width * windowScale, this.cy3 = this.y + this.height * windowScale,
+      this.cx4 = ctrX - this.width * windowScale, this.cy4 = this.y * windowScale
   }
 
   init(pattern) {
@@ -147,22 +154,46 @@ class mouse {
     fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
 
     if (mousePattern == "") {
-      arc(canvasX / 2, this.y * windowScale, this.width * 2 * windowScale, this.height * 2 * windowScale, 0, PI, PIE);
+      arc(cnvsW / 2, this.y * windowScale, this.width * 2 * windowScale, this.height * 2 * windowScale, 0, PI, PIE);
     }
 
     // pattern 1 : Human mouse
     if (mousePattern == "パターン１") {
-      arc(canvasX / 2, this.y * windowScale, this.width * 2 * windowScale, this.height * 2 * windowScale, 0, PI, PIE);
+      // arc(cnvsW / 2, this.y * windowScale, this.width * 2 * windowScale, this.height * 2 * windowScale, 0, PI, PIE);
+
+      // console.log(this.cx0, this.cx1, this.cx2, this.cx3);
+
+      beginShape();
+      fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
+      strokeWeight(1);
+      vertex(this.cx0, this.cy0);
+      bezierVertex(this.cx0, this.cy0, this.cx1, this.cy1, this.cx2, this.cy2);
+      bezierVertex(this.cx2, this.cy2, this.cx3, this.cy3, this.cx4, this.cy4);
+      vertex(this.cx0, this.cy0);
+      endShape();
+
+      strokeWeight(0);
+      if (pointControlElement == "mouse") {
+        fill('#2196f3');
+        circle(this.cx0, this.cy0, this.cr);
+        circle(this.cx1, this.cy1, this.cr);
+        circle(this.cx2, this.cy2, this.cr);
+        circle(this.cx3, this.cy3, this.cr);
+        circle(this.cx4, this.cy4, this.cr);
+      }
+
+      fill('#fff');
+      strokeWeight(1);
     }
 
     // pattern 2 : NAO mouse
     if (mousePattern == "パターン２") {
-      quad((canvasX - this.width * windowScale) / 2, this.y * windowScale, (canvasX + this.width * windowScale) / 2, this.y * windowScale, (canvasX + (this.width * 0.8 * windowScale)) / 2, this.y * windowScale + this.height * windowScale, (canvasX - (this.width * 0.8 * windowScale)) / 2, this.y * windowScale + this.height * windowScale);
+      quad((cnvsW - this.width * windowScale) / 2, this.y * windowScale, (cnvsW + this.width * windowScale) / 2, this.y * windowScale, (cnvsW + (this.width * 0.8 * windowScale)) / 2, this.y * windowScale + this.height * windowScale, (cnvsW - (this.width * 0.8 * windowScale)) / 2, this.y * windowScale + this.height * windowScale);
     }
 
     // pattern 3 : Triangle mouse
     if (mousePattern == "パターン３") {
-      triangle((canvasX - this.width * windowScale) / 2, this.y * windowScale + this.height * windowScale, canvasX / 2, this.y * windowScale, (canvasX + this.width * windowScale) / 2, this.y * windowScale + this.height * windowScale);
+      triangle((cnvsW - this.width * windowScale) / 2, this.y * windowScale + this.height * windowScale, cnvsW / 2, this.y * windowScale, (cnvsW + this.width * windowScale) / 2, this.y * windowScale + this.height * windowScale);
     }
   }
 
@@ -171,16 +202,38 @@ class mouse {
     if (direction == "down") this.y += 10;
   }
 
-  resize(value) {
-    if (value > this.mouseScale) {
-      this.width = this.width * value / this.mouseScale;
-      this.height = this.height * value / this.mouseScale;
-    } else if (value < this.mouseScale) {
-      this.width = this.width * value / this.mouseScale;
-      this.height = this.height * value / this.mouseScale;
+  resize(value, direction) {
+    if (direction == "width") {
+      if (!(value == this.widthScale)) {
+        this.width = this.width * value / this.widthScale;
+        this.widthScale = value;
+        this.reCoordinate();
+      }
+    } else if (direction == "height") {
+      if (!(value == this.heightScale)) {
+        this.height = this.height * value / this.heightScale;
+        this.heightScale = value;
+        this.reCoordinate();
+      }
+    } if (direction == "size") {
+      if (!(value == this.mouseScale)) {
+        this.width = this.width * value / this.mouseScale;
+        this.height = this.height * value / this.mouseScale;
+        this.mouseScale = value;
+        this.reCoordinate();
+      }
     }
-    this.mouseScale = value;
   }
+
+  reCoordinate() {
+    this.cx0 = ctrX + this.width * windowScale, this.cy0 = this.y * windowScale,
+      this.cx1 = ctrX + this.width * windowScale, this.cy1 = (this.y + this.height) * windowScale,
+      this.cx2 = ctrX, this.cy2 = (this.y + this.height) * windowScale,
+      this.cx3 = ctrX - this.width * windowScale, this.cy3 = (this.y + this.height) * windowScale,
+      this.cx4 = ctrX - this.width * windowScale, this.cy4 = this.y * windowScale
+  }
+
+
 
   reColor(color) {
     this.colorRed = color[0];
@@ -214,16 +267,16 @@ class head {
       if (pattern == "パターン１") {
         this.amp = 200;
         this.cr = 20 * windowScale;
-        this.cx0 = centerX, this.cy0 = (this.y + 20) * windowScale;
-        this.cx1 = centerX + (this.amp + 20) * windowScale, this.cy1 = (this.y + 40) * windowScale;
-        this.cx2 = centerX + (this.amp) * windowScale, this.cy2 = (this.y + 180) * windowScale;
-        this.cx3 = centerX + (this.amp) * windowScale, this.cy3 = (this.y + 260) * windowScale;
-        this.cx4 = centerX + (this.amp) * windowScale, this.cy4 = (this.y + 440) * windowScale;
-        this.cx5 = centerX, this.cy5 = (this.y + 500) * windowScale;
-        this.cx6 = centerX - (this.amp) * windowScale, this.cy6 = (this.y + 440) * windowScale;
-        this.cx7 = centerX - (this.amp) * windowScale, this.cy7 = (this.y + 260) * windowScale;
-        this.cx8 = centerX - (this.amp) * windowScale, this.cy8 = (this.y + 180) * windowScale;
-        this.cx9 = centerX - (this.amp + 20) * windowScale, this.cy9 = (this.y + 40) * windowScale;
+        this.cx0 = ctrX, this.cy0 = (this.y + 20) * windowScale;
+        this.cx1 = ctrX + (this.amp + 20) * windowScale, this.cy1 = (this.y + 40) * windowScale;
+        this.cx2 = ctrX + (this.amp) * windowScale, this.cy2 = (this.y + 180) * windowScale;
+        this.cx3 = ctrX + (this.amp) * windowScale, this.cy3 = (this.y + 260) * windowScale;
+        this.cx4 = ctrX + (this.amp) * windowScale, this.cy4 = (this.y + 440) * windowScale;
+        this.cx5 = ctrX, this.cy5 = (this.y + 500) * windowScale;
+        this.cx6 = ctrX - (this.amp) * windowScale, this.cy6 = (this.y + 440) * windowScale;
+        this.cx7 = ctrX - (this.amp) * windowScale, this.cy7 = (this.y + 260) * windowScale;
+        this.cx8 = ctrX - (this.amp) * windowScale, this.cy8 = (this.y + 180) * windowScale;
+        this.cx9 = ctrX - (this.amp + 20) * windowScale, this.cy9 = (this.y + 40) * windowScale;
         console.log("hogehoge");
       };
       if (pattern == "パターン２");
@@ -238,7 +291,7 @@ class head {
     // pattern 0 : no selected
     if (headPattern == "") {
       strokeWeight(0);
-      circle(centerX, (centerY - 80) * windowScale, 400 * windowScale);
+      circle(ctrX, (ctrY - 80) * windowScale, 440 * windowScale);
       strokeWeight(1);
     }
 
@@ -277,9 +330,9 @@ class head {
     // pattern 2 : NAO face
     if (headPattern == "パターン２") {
       strokeWeight(0);
-      rect(canvasX / 2 + 169 * windowScale, 140 * windowScale, 80 * windowScale, 240 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale);
-      rect(canvasX / 2 - 251 * windowScale, 140 * windowScale, 80 * windowScale, 240 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale);
-      ellipse(canvasX / 2, 260 * windowScale, 480 * windowScale, 420 * windowScale);
+      rect(cnvsW / 2 + 169 * windowScale, 140 * windowScale, 80 * windowScale, 240 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale);
+      rect(cnvsW / 2 - 251 * windowScale, 140 * windowScale, 80 * windowScale, 240 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale, 20 * windowScale);
+      ellipse(cnvsW / 2, 260 * windowScale, 480 * windowScale, 420 * windowScale);
       strokeWeight(1);
     }
 
@@ -287,10 +340,10 @@ class head {
     if (headPattern == "パターン３") {
       strokeWeight(0);
       beginShape();
-      vertex(canvasX / 2, 80 * windowScale);
-      bezierVertex(canvasX / 2 + 240 * windowScale, 96 * windowScale, canvasX / 2 + 220 * windowScale, 240 * windowScale, canvasX / 2 + 240 * windowScale, 500 * windowScale);
-      vertex(canvasX / 2 - 242 * windowScale, 500 * windowScale);
-      bezierVertex(canvasX / 2 - 222 * windowScale, 240 * windowScale, canvasX / 2 - 242 * windowScale, 96 * windowScale, canvasX / 2, 80 * windowScale);
+      vertex(cnvsW / 2, 80 * windowScale);
+      bezierVertex(cnvsW / 2 + 240 * windowScale, 96 * windowScale, cnvsW / 2 + 220 * windowScale, 240 * windowScale, cnvsW / 2 + 240 * windowScale, 500 * windowScale);
+      vertex(cnvsW / 2 - 242 * windowScale, 500 * windowScale);
+      bezierVertex(cnvsW / 2 - 222 * windowScale, 240 * windowScale, cnvsW / 2 - 242 * windowScale, 96 * windowScale, cnvsW / 2, 80 * windowScale);
       endShape();
       strokeWeight(1);
     }
@@ -331,12 +384,12 @@ class display {
 
     // pattern 1
     if (displayPattern == "パターン１") {
-      rect((canvasX - this.width * windowScale) / 2, this.y * windowScale, this.width * windowScale, this.height * windowScale, this.radius * windowScale);
+      rect((cnvsW - this.width * windowScale) / 2, this.y * windowScale, this.width * windowScale, this.height * windowScale, this.radius * windowScale);
     }
 
     // pattern 2
     if (displayPattern == "パターン２") {
-      rect((canvasX - this.width * windowScale) / 2, this.y * windowScale, this.width * windowScale, this.height * windowScale, this.radius * windowScale, this.radius * windowScale, 0, 0);
+      rect((cnvsW - this.width * windowScale) / 2, this.y * windowScale, this.width * windowScale, this.height * windowScale, this.radius * windowScale, this.radius * windowScale, 0, 0);
     }
   }
 
@@ -352,21 +405,21 @@ let windowScale = 1.0;
 
 // .2.a Eye
 let eyePattern = "";
-let rightEye = new eye(canvasX / 2 - 100, 260, 50, 50, 1.0, "rightEye");  // 右目
-let leftEye = new eye(canvasX / 2 + 100, 260, 50, 50, 1.0, "leftEye");    // 左目
+let rightEye = new eye(cnvsW / 2 - 100, 260, 50, 50, 1.0, "rightEye");  // 右目
+let leftEye = new eye(cnvsW / 2 + 100, 260, 50, 50, 1.0, "leftEye");    // 左目
 
 // .2.b Mouse
 let mousePattern = "";
-let robotMouse = new mouse((canvasX - 400) / 2, 400, 20, 20, 1.0);
+let robotMouse = new mouse((cnvsW - 400) / 2, 400, 40, 40, 1.0);
 
 // .2.c Head
 let headPattern = "";
-// let robotHead = new head((canvasX - 400) / 2, 0, 400, 400, 16);
-let robotHead = new head(canvasX / 2, 0, 400, 400, 16);
+// let robotHead = new head((cnvsW - 400) / 2, 0, 400, 400, 16);
+let robotHead = new head(cnvsW / 2, 0, 400, 400, 16);
 
 // .2.d display
 let displayPattern = "";
-let robotDisplay = new display((canvasX - 400) / 2, 160, 320, 160, 40);
+let robotDisplay = new display((cnvsW - 400) / 2, 160, 320, 160, 40);
 
 
 /* -- 1.3 BODY -- */
@@ -461,7 +514,7 @@ class body {
     fill('#fcfcfc');
     strokeWeight(0);
     if (bodyPattern == "") {
-      rect((canvasX - this.width) / 2, this.y * windowScale, this.width, this.height, this.radius);
+      rect((cnvsW - this.width) / 2, this.y * windowScale, this.width, this.height, this.radius);
     }
     if (bodyPattern == "パターン１") {
       ellipse(this.x, this.y, this.width, this.height);
@@ -642,24 +695,25 @@ class leg {
 
 // .4.a Neck
 let neckPattern = "";
-let robotNeck = new neck(canvasX / 2, 500, 40, 40, 1.0);
+let robotNeck = new neck(cnvsW / 2, 500, 40, 40, 1.0);
 
 // .4.b Body
 let bodyPattern = "";
-let robotBody = new body(canvasX / 2, 500, 160, 200, 1.0);
+let robotBody = new body(cnvsW / 2, 500, 160, 200, 1.0);
 
 // .4.c Arm
 let armPattern = "";
-let leftArm = new arm(canvasX / 2 - 108, 500, 48, 220, "left");
-let rightArm = new arm(canvasX / 2 + 108, 500, 48, 220, "right");
+let leftArm = new arm(cnvsW / 2 - 108, 500, 48, 220, "left");
+let rightArm = new arm(cnvsW / 2 + 108, 500, 48, 220, "right");
 
 // .4.d leg 
 let legPattern = "";
-let leftLeg = new leg(canvasX / 2 - 40, 1080, 56, 220, "left");
-let rightLeg = new leg(canvasX / 2 + 40, 1080, 56, 220, "right");
+let leftLeg = new leg(cnvsW / 2 - 40, 1080, 56, 220, "left");
+let rightLeg = new leg(cnvsW / 2 + 40, 1080, 56, 220, "right");
 
 // .x.x 
 let selected = "";
+let pointControlElement = "";
 
 
 /*** -- 2. function of p5.js -- ***/
@@ -672,10 +726,14 @@ let selected = "";
 */
 
 let cnvs; // Creating a Canvas
+// let img;
+// function preload() {
+//   img = loadImage('assets/img/bg-img1.jpg');
+// }
 
 // 2.1 SETUP：最初に１回だけ(初期化)
 function setup() {
-  cnvs = createCanvas(canvasX, canvasY); // Creating a Canvas
+  cnvs = createCanvas(cnvsW, cnvsH); // Creating a Canvas
 }
 
 // 2.2 DRAW：setup後に繰り返し実行（フレーム単位）
@@ -683,10 +741,12 @@ function draw() {
   let tabNum = tabSwiching();
 
   clear();
-  background(canvasColor);
+  background(cnvsColor);
 
   // Depiction of the head
   if (tabNum == 1) {
+    cnvs.position(0, 0);
+    cnvsColor = "#ff980099";
     windowScale = 1.0;
     cnvs.parent('canvas1');
     robotHead.draw();
@@ -697,6 +757,8 @@ function draw() {
   }
 
   if (tabNum == 2) {
+    cnvs.position(0, 0);
+    cnvsColor = "#ff980099";
     windowScale = 0.3;
     cnvs.parent('canvas2');
 
@@ -710,6 +772,7 @@ function draw() {
     robotHead.init(headPattern, 2);
     robotHead.draw();
     robotDisplay.draw();
+    robotMouse.reCoordinate();
     robotMouse.draw();
     rightEye.draw(tabNum);  // 右目
     leftEye.draw(tabNum);   // 左目
@@ -719,6 +782,8 @@ function draw() {
   }
 
   if (tabNum == 3) {
+    cnvs.position(-160, 160);
+    cnvsColor = "#ff980001";
     windowScale = 0.3;
     cnvs.parent('canvas3');
 
@@ -817,7 +882,7 @@ function keyPressed() {
 }
 
 
-// 2.4 MOOUSE_RELEASED：マウスがリリースされた場合
+// 2.4 MOOUSE_RELEASED：マウスがリリース時 / MDC_Slider
 function mouseReleased() {
   // Color Slider
   var cmRed = document.getElementById("color-model-red").getAttribute("aria-valuenow");
@@ -849,7 +914,6 @@ function mouseReleased() {
     robotHead.colorAlpha = cmAlpha;
   }
 
-
   // 目のスライドバー
   var eyeSize = document.getElementById("eye-size").getAttribute("aria-valuenow");
   if (eyeSize != leftEye.width) leftEye.resize(eyeSize, "size"), rightEye.resize(eyeSize, "size");
@@ -864,7 +928,12 @@ function mouseReleased() {
   leftEye.repupilSize(pupilRate), rightEye.repupilSize(pupilRate);
   // 口のスライダー
   var mouseSize = document.getElementById("slider-mouse").getAttribute("aria-valuenow");
-  robotMouse.resize(mouseSize);
+  robotMouse.resize(mouseSize, "size");
+  // 口の横幅
+  var mouseWidth = document.getElementById("slider-mouse-width").getAttribute("aria-valuenow");
+  robotMouse.resize(mouseWidth, "width");
+  var mouseHeight = document.getElementById("slider-mouse-height").getAttribute("aria-valuenow");
+  robotMouse.resize(mouseHeight, "height");
 
   // 首のスライダ
   var neckSize = document.getElementById("slider-neck").getAttribute("aria-valuenow");
@@ -889,23 +958,23 @@ function mouseReleased() {
 // 2.5 MOUSE_DRAGGED：マウスがドラッグされている間
 function mouseDragged() {
   if (selected == "eye") {
-    if ((mouseX < 0) || (mouseX > canvasX)) selected = "";
-    if ((mouseY < 0) || (mouseY > canvasY)) selected = "";
+    if ((mouseX < 0) || (mouseX > cnvsW)) selected = "";
+    if ((mouseY < 0) || (mouseY > cnvsH)) selected = "";
     leftEye.x = mouseX, leftEye.y = mouseY;
-    rightEye.x = canvasX / 2 + (canvasX / 2 - mouseX), rightEye.y = mouseY;
+    rightEye.x = cnvsW / 2 + (cnvsW / 2 - mouseX), rightEye.y = mouseY;
   }
 
   if (selected == "mouse") {
-    if ((mouseX < 0) || (mouseX > canvasX)) selected = "";
-    if ((mouseY < 0) || (mouseY > canvasY)) selected = "";
+    if ((mouseX < 0) || (mouseX > cnvsW)) selected = "";
+    if ((mouseY < 0) || (mouseY > cnvsH)) selected = "";
     robotMouse.y = mouseY;
   }
 
   if (selected == "head") {
-    controlPoint();
+    // controlPoint();
   }
 
-  // controlPoint();
+  controlPoint();
 }
 
 // 制御点の変更を行う関数
@@ -920,25 +989,25 @@ function controlPoint() {
     if ((mouseX <= robotHead.cx1 + 10) && ((mouseX >= robotHead.cx1 - 10))) {
       if ((mouseY <= robotHead.cy1 + 10) && ((mouseY >= robotHead.cy1 - 10))) {
         robotHead.cx1 = mouseX, robotHead.cy1 = mouseY;
-        robotHead.cx9 = centerX - (mouseX - centerX), robotHead.cy9 = mouseY;
+        robotHead.cx9 = ctrX - (mouseX - ctrX), robotHead.cy9 = mouseY;
       }
     }
     if ((mouseX <= robotHead.cx2 + 10) && ((mouseX >= robotHead.cx2 - 10))) {
       if ((mouseY <= robotHead.cy2 + 10) && ((mouseY >= robotHead.cy2 - 10))) {
         robotHead.cx2 = mouseX, robotHead.cy2 = mouseY;
-        robotHead.cx8 = centerX - (mouseX - centerX), robotHead.cy8 = mouseY;
+        robotHead.cx8 = ctrX - (mouseX - ctrX), robotHead.cy8 = mouseY;
       }
     }
     if ((mouseX <= robotHead.cx3 + 10) && ((mouseX >= robotHead.cx3 - 10))) {
       if ((mouseY <= robotHead.cy3 + 10) && ((mouseY >= robotHead.cy3 - 10))) {
         robotHead.cx3 = mouseX, robotHead.cy3 = mouseY;
-        robotHead.cx7 = centerX - (mouseX - centerX), robotHead.cy7 = mouseY;
+        robotHead.cx7 = ctrX - (mouseX - ctrX), robotHead.cy7 = mouseY;
       }
     }
     if ((mouseX <= robotHead.cx4 + 10) && ((mouseX >= robotHead.cx4 - 10))) {
       if ((mouseY <= robotHead.cy4 + 10) && ((mouseY >= robotHead.cy4 - 10))) {
         robotHead.cx4 = mouseX, robotHead.cy4 = mouseY;
-        robotHead.cx6 = centerX - (mouseX - centerX), robotHead.cy6 = mouseY;
+        robotHead.cx6 = ctrX - (mouseX - ctrX), robotHead.cy6 = mouseY;
       }
     }
     if ((mouseX <= robotHead.cx5 + 10) && ((mouseX >= robotHead.cx5 - 10))) {
@@ -949,25 +1018,48 @@ function controlPoint() {
     if ((mouseX <= robotHead.cx9 + 10) && ((mouseX >= robotHead.cx9 - 10))) {
       if ((mouseY <= robotHead.cy9 + 10) && ((mouseY >= robotHead.cy9 - 10))) {
         robotHead.cx9 = mouseX, robotHead.cy9 = mouseY;
-        robotHead.cx1 = centerX - (mouseX - centerX), robotHead.cy1 = mouseY;
+        robotHead.cx1 = ctrX - (mouseX - ctrX), robotHead.cy1 = mouseY;
       }
     }
     if ((mouseX <= robotHead.cx8 + 10) && ((mouseX >= robotHead.cx8 - 10))) {
       if ((mouseY <= robotHead.cy8 + 10) && ((mouseY >= robotHead.cy8 - 10))) {
         robotHead.cx8 = mouseX, robotHead.cy8 = mouseY;
-        robotHead.cx2 = centerX - (mouseX - centerX), robotHead.cy2 = mouseY;
+        robotHead.cx2 = ctrX - (mouseX - ctrX), robotHead.cy2 = mouseY;
       }
     }
     if ((mouseX <= robotHead.cx7 + 10) && ((mouseX >= robotHead.cx7 - 10))) {
       if ((mouseY <= robotHead.cy7 + 10) && ((mouseY >= robotHead.cy7 - 10))) {
         robotHead.cx7 = mouseX, robotHead.cy7 = mouseY;
-        robotHead.cx3 = centerX - (mouseX - centerX), robotHead.cy3 = mouseY;
+        robotHead.cx3 = ctrX - (mouseX - ctrX), robotHead.cy3 = mouseY;
       }
     }
     if ((mouseX <= robotHead.cx6 + 10) && ((mouseX >= robotHead.cx6 - 10))) {
       if ((mouseY <= robotHead.cy6 + 10) && ((mouseY >= robotHead.cy6 - 10))) {
         robotHead.cx6 = mouseX, robotHead.cy6 = mouseY;
-        robotHead.cx4 = centerX - (mouseX - centerX), robotHead.cy4 = mouseY;
+        robotHead.cx4 = ctrX - (mouseX - ctrX), robotHead.cy4 = mouseY;
+      }
+    }
+  }
+
+  if (pointControlElement == "mouse") {
+    if (mousePattern == "パターン１") {
+      console.log("hoge");
+      if ((mouseX <= robotMouse.cx0 + 10) && ((mouseX >= robotMouse.cx0 - 10))) {
+        if ((mouseY <= robotMouse.cy0 + 10) && ((mouseY >= robotMouse.cy0 - 10))) {
+          robotMouse.cx0 = mouseX, robotMouse.cy0 = mouseY;
+          robotMouse.cx4 = ctrX - (mouseX - ctrX), robotMouse.cy4 = mouseY;
+        }
+      }
+      if ((mouseX <= robotMouse.cx1 + 10) && ((mouseX >= robotMouse.cx1 - 10))) {
+        if ((mouseY <= robotMouse.cy1 + 10) && ((mouseY >= robotMouse.cy1 - 10))) {
+          robotMouse.cx1 = mouseX, robotMouse.cy1 = mouseY;
+          robotMouse.cx3 = ctrX - (mouseX - ctrX), robotMouse.cy3 = mouseY;
+        }
+      }
+      if ((mouseX <= robotMouse.cx2 + 10) && ((mouseX >= robotMouse.cx2 - 10))) {
+        if ((mouseY <= robotMouse.cy2 + 10) && ((mouseY >= robotMouse.cy2 - 10))) {
+          robotMouse.cy2 = mouseY;
+        }
       }
     }
   }
@@ -1035,13 +1127,21 @@ function syncSelectorValue(red, green, blue, alpha) {
 
 
 // SELECT_ELEMENT：移動する要素を選択する関数
-function selectElement(name) {
-  if (selected == name) {
-    selected = "";
+function selectElement(name, behavior) {
+  if (behavior == "point") {
+    if (pointControlElement == name) {
+      pointControlElement = "";
+    } else {
+      pointControlElement = name;
+    }
   } else {
-    selected = name;
+    if (selected == name) {
+      selected = "";
+    } else {
+      selected = name;
+    }
   }
-  // console.log(name);
+  console.log(name, behavior);
 }
 
 // CHANGE_SELECT
@@ -1069,7 +1169,7 @@ function changeSelect(parts) {
 function changedPattern(pattern, element) {
   // - Head - 
   // Eye
-  if (element == "eye") eyePattern = pattern;
+  if (element == "eye") leftEye.init(pattern), rightEye.init(pattern);
   // Mouse
   if (element == "mouse") mousePattern = pattern;
   // Head
@@ -1112,7 +1212,10 @@ function tabSwiching() {
 }
 
 
-// 
+// キャンバスに背景画像を追加
+function ChangeBackground() {
+  document.querySelector('#canvas3').getAttribute()
+}
 
 
 // window.addEventListener('beforeunload', function (e) {

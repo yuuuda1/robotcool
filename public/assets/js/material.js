@@ -123,6 +123,9 @@ pupilS.listen('MDCSlider:change', () => console.log(`Value changed to ${pupilS.v
 // - Mouse - 
 const mouseSize = mdc.slider.MDCSlider.attachTo(document.querySelector('.mouse-size'));
 mouseSize.listen('MDCSlider:change', () => console.log(`Value changed to ${mouseSize.value}`));
+const mouseWidth = mdc.slider.MDCSlider.attachTo(document.querySelector('.slider-mouse-width'));
+// mouseWidth.listen('MDCSlider:change', () => console.log(`Value changed to ${mouseWidth.value}`));
+const mouseHeight = mdc.slider.MDCSlider.attachTo(document.querySelector('.slider-mouse-height'));
 
 /* -- 17.2 Body -- */
 // - Neck -

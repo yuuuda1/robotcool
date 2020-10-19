@@ -148,8 +148,13 @@ main {
 .middle-block {
   position: relative;
   top: 0px;
-  width: calc(100vw - 758px);
-  height: 520px;
+  width: calc(100vw - 796px);
+  height: calc(100vh - 208px);
+}
+
+#canvas3 {
+  background-size: cover;
+  background-image: url(../../assets/img/bg-img1.jpg);
 }
 
 .right-block {

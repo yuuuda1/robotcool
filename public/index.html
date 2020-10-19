@@ -359,8 +359,8 @@
                     </ul>
                   </div>
                 </div>
-                <!-- <button class="mdc-icon-button material-icons head-edit-icons edit-icon-button"
-                  onclick="selectElement(`mouse`)">edit</button> -->
+                <button class="mdc-icon-button material-icons head-edit-icons edit-icon-button"
+                  onclick="selectElement('mouse','point')">edit</button>
                 <button class="mdc-icon-button material-icons edit-icon-button" onclick="changeColor(`mouse`)"
                   id="color-dialog">color_lens</button>
                 <button class="mdc-icon-button material-icons edit-icon-button"
@@ -371,6 +371,38 @@
                   <p>口の大きさ</p>
                   <div id="slider-mouse" class="mdc-slider mouse-size" tabindex="0" role="slider" aria-valuemin="0.1"
                     aria-valuemax="2" aria-valuenow="1" aria-label="Select Value">
+                    <div class="mdc-slider__track-container">
+                      <div class="mdc-slider__track"></div>
+                    </div>
+                    <div class="mdc-slider__thumb-container">
+                      <svg class="mdc-slider__thumb" width="21" height="21">
+                        <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                      </svg>
+                      <div class="mdc-slider__focus-ring"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row-3">
+                <div>
+                  <p>口の横幅</p>
+                  <div id="slider-mouse-width" class="mdc-slider slider-mouse-width" tabindex="0" role="slider"
+                    aria-valuemin="0.1" aria-valuemax="2" aria-valuenow="1" aria-label="Select Value">
+                    <div class="mdc-slider__track-container">
+                      <div class="mdc-slider__track"></div>
+                    </div>
+                    <div class="mdc-slider__thumb-container">
+                      <svg class="mdc-slider__thumb" width="21" height="21">
+                        <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                      </svg>
+                      <div class="mdc-slider__focus-ring"></div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <p>口の縦幅</p>
+                  <div id="slider-mouse-height" class="mdc-slider slider-mouse-height" tabindex="0" role="slider"
+                    aria-valuemin="0.1" aria-valuemax="2" aria-valuenow="1" aria-label="Select Value">
                     <div class="mdc-slider__track-container">
                       <div class="mdc-slider__track"></div>
                     </div>
