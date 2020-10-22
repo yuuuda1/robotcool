@@ -8,11 +8,11 @@
 /* 
 1.0 Foundation
  .1 canvas
-1.1 HEAD
+1.1 face
  .1.0 definition of canvas
  .1.a eye
  .1.b mouse
- .1.c head
+ .1.c face
  .1.d display
 1.2 Body
  .2.a Neck
@@ -32,7 +32,10 @@ let cnvsH = window.innerHeight - 208; // 縦幅(height)
 const ctrX = cnvsW / 2; // 中央のX座標
 const ctrY = cnvsH / 2; // 中央のY座標
 
-/* -- 1.1 HEAD -- */
+/* -- 1.1 face -- */
+// -- x.x.x face 
+
+
 // -- x.1.a Eye / 目
 class eye {
   constructor(x, y, width, height, scale, lor) {
@@ -346,36 +349,35 @@ class mouse {
   }
 }
 
-// .1.c Head
-class head {
-  constructor(x, y, width, height, headRd) {
+// .1.c face
+class face {
+  constructor(x, y, width, height, faceRd) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.headRd = headRd;
-    this.headScale = 1.0;
-    (this.colorRed = 255),
-      (this.colorGreen = 255),
-      (this.colorBlue = 255),
-      (this.colorAlpha = 100);
-
+    this.faceRd = faceRd;
+    this.faceScale = 1.0;
+    this.colorRed = 255,
+      this.colorGreen = 255,
+      this.colorBlue = 255,
+      this.colorAlpha = 100;
     this.amp = 0;
     this.cr = 0;
-    (this.cx0 = 0),
-      (this.cx1 = 0),
-      (this.cx2 = 0),
-      (this.cx3 = 0),
-      (this.cx4 = 0),
-      (this.cx5 = 0),
-      (this.cx6 = 0),
-      (this.cx7 = 0),
-      (this.cx8 = 0),
-      (this.cx9 = 0);
+    this.cx0 = 0,
+      this.cx1 = 0,
+      this.cx2 = 0,
+      this.cx3 = 0,
+      this.cx4 = 0,
+      this.cx5 = 0,
+      this.cx6 = 0,
+      this.cx7 = 0,
+      this.cx8 = 0,
+      this.cx9 = 0;
   }
 
   init(pattern, tabNum) {
-    if (headPattern != pattern || tabNum == 2) {
+    if (facePattern != pattern || tabNum == 2) {
       if (pattern == "");
       if (pattern == "パターン１") {
         this.amp = 200;
@@ -402,29 +404,22 @@ class head {
       }
       if (pattern == "パターン２");
       if (pattern == "パターン３");
-      headPattern = pattern;
+      facePattern = pattern;
     }
   }
 
   draw() {
-    fill(
-      color(
-        this.colorRed,
-        this.colorGreen,
-        this.colorBlue,
-        this.colorAlpha * 2.55
-      )
-    );
+    fill(color(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha * 2.55));
 
     // pattern 0 : no selected
-    if (headPattern == "") {
+    if (facePattern == "") {
       strokeWeight(0);
       circle(ctrX, (ctrY - 80) * windowScale, 440 * windowScale);
       strokeWeight(1);
     }
 
     // pattern 1 : human face
-    if (headPattern == "パターン１") {
+    if (facePattern == "パターン１") {
       strokeWeight(0);
       beginShape();
       vertex(this.cx0, this.cy0);
@@ -434,7 +429,7 @@ class head {
       bezierVertex(this.cx8, this.cy8, this.cx9, this.cy9, this.cx0, this.cy0);
       endShape();
 
-      if (selected == "head") {
+      if (selected == "face") {
         fill("#2196f3");
         circle(this.cx0, this.cy0, this.cr);
         circle(this.cx1, this.cy1, this.cr);
@@ -456,11 +451,9 @@ class head {
     }
 
     // pattern 2 : NAO face
-    if (headPattern == "パターン２") {
+    if (facePattern == "パターン２") {
       strokeWeight(0);
-      rect(
-        cnvsW / 2 + 169 * windowScale,
-        140 * windowScale,
+      rect(cnvsW / 2 + 169 * windowScale, 140 * windowScale,
         80 * windowScale,
         240 * windowScale,
         20 * windowScale,
@@ -488,7 +481,7 @@ class head {
     }
 
     // pattern 3 : Musio X face
-    if (headPattern == "パターン３") {
+    if (facePattern == "パターン３") {
       strokeWeight(0);
       beginShape();
       vertex(cnvsW / 2, 80 * windowScale);
@@ -517,6 +510,7 @@ class head {
   move(direction) {
     if (direction == "up") this.y -= 10;
     if (direction == "down") this.y += 10;
+    this.reCoordinate();
   }
 
   reColor(color) {
@@ -524,18 +518,11 @@ class head {
     this.colorGreen = color[1];
     this.colorBlue = color[2];
     this.colorAlpha = color[3];
-    syncSelectorValue(
-      this.colorRed,
-      this.colorGreen,
-      this.colorBlue,
-      this.colorAlpha
-    );
-    console.log(
-      this.colorRed,
-      this.colorGreen,
-      this.colorBlue,
-      this.colorAlpha
-    );
+    syncSelectorValue(this.colorRed, this.colorGreen, this.colorBlue, this.colorAlpha);
+  }
+
+  reCoordinate() {
+
   }
 }
 
@@ -592,7 +579,7 @@ class display {
   }
 }
 
-/* -- 1.2 Head Global variable -- */
+/* -- 1.2 face Global variable -- */
 let windowScale = 1.0;
 
 // .2.a Eye
@@ -604,10 +591,10 @@ let leftEye = new eye(cnvsW / 2 + 100, 260, 50, 50, 1.0, "leftEye"); // 左目
 let mousePattern = "";
 let robotMouse = new mouse((cnvsW - 400) / 2, 400, 40, 40, 1.0);
 
-// .2.c Head
-let headPattern = "";
-// let robotHead = new head((cnvsW - 400) / 2, 0, 400, 400, 16);
-let robotHead = new head(cnvsW / 2, 0, 400, 400, 16);
+// .2.c face
+let facePattern = "";
+// let robotFace = new face((cnvsW - 400) / 2, 0, 400, 400, 16);
+let robotFace = new face(cnvsW / 2, 0, 400, 400, 16);
 
 // .2.d display
 let displayPattern = "";
@@ -783,38 +770,10 @@ class body {
       bezierVertex(this.cx2, this.cy2, this.cx3, this.cy3, this.cx4, this.cy4);
       bezierVertex(this.cx4, this.cy4, this.cx5, this.cy5, this.cx6, this.cy6);
       bezierVertex(this.cx6, this.cy6, this.cx7, this.cy7, this.cx8, this.cy8);
-      bezierVertex(
-        this.cx8,
-        this.cy8,
-        this.cx9,
-        this.cy9,
-        this.cx10,
-        this.cy10
-      );
-      bezierVertex(
-        this.cx10,
-        this.cy10,
-        this.cx11,
-        this.cy11,
-        this.cx12,
-        this.cy12
-      );
-      bezierVertex(
-        this.cx12,
-        this.cy12,
-        this.cx13,
-        this.cy13,
-        this.cx14,
-        this.cy14
-      );
-      bezierVertex(
-        this.cx14,
-        this.cy14,
-        this.cx15,
-        this.cy15,
-        this.cx16,
-        this.cy16
-      );
+      bezierVertex(this.cx8, this.cy8, this.cx9, this.cy9, this.cx10, this.cy10);
+      bezierVertex(this.cx10, this.cy10, this.cx11, this.cy11, this.cx12, this.cy12);
+      bezierVertex(this.cx12, this.cy12, this.cx13, this.cy13, this.cx14, this.cy14);
+      bezierVertex(this.cx14, this.cy14, this.cx15, this.cy15, this.cx16, this.cy16);
       ellipse(this.cx8, this.cy8 + 10, 120, 80);
       endShape();
     }
@@ -829,38 +788,11 @@ class body {
       bezierVertex(this.cx2, this.cy2, this.cx3, this.cy3, this.cx4, this.cy4);
       bezierVertex(this.cx4, this.cy4, this.cx5, this.cy5, this.cx6, this.cy6);
       bezierVertex(this.cx6, this.cy6, this.cx7, this.cy7, this.cx8, this.cy8);
-      bezierVertex(
-        this.cx8,
-        this.cy8,
-        this.cx9,
-        this.cy9,
-        this.cx10,
-        this.cy10
-      );
-      bezierVertex(
-        this.cx10,
-        this.cy10,
-        this.cx11,
-        this.cy11,
-        this.cx12,
-        this.cy12
-      );
-      bezierVertex(
-        this.cx12,
-        this.cy12,
-        this.cx13,
-        this.cy13,
-        this.cx14,
-        this.cy14
-      );
-      bezierVertex(
-        this.cx14,
-        this.cy14,
-        this.cx15,
-        this.cy15,
-        this.cx16,
-        this.cy16
-      );
+      bezierVertex(this.cx8, this.cy8, this.cx9, this.cy9, this.cx10, this.cy10);
+      bezierVertex(this.cx10, this.cy10, this.cx11, this.cy11, this.cx12, this.cy12);
+      bezierVertex(this.cx12, this.cy12, this.cx13, this.cy13, this.cx14, this.cy14);
+      bezierVertex(this.cx14, this.cy14, this.cx15, this.cy15, this.cx16, this.cy16);
+      ellipse(this.cx8, this.cy8 + 10, 120, 80);
       endShape();
     }
     if (bodyPattern == "パターン３") {
@@ -915,7 +847,7 @@ class arm {
     strokeWeight(0);
 
     if (armPattern == "") {
-      // rect(0, -this.width / 2, this.width, this.height, this.radius);
+      rect(this.x, this.y, this.width, this.height, this.radius);
     }
     if (armPattern == "パターン１") {
       if (this.lor == "left") {
@@ -964,8 +896,6 @@ class arm {
     }
     if (armPattern == "なし") {
     }
-    // strokeWeight(0);
-    // resetMatrix();
   }
 
   move(direction) {
@@ -1087,8 +1017,8 @@ let robotBody = new body(cnvsW / 2, 160, 160, 200, 1.0);
 // .4.c Arm
 let armPattern = "";
 // let leftArm = new arm(cnvsW / 2 - 108, 500, 48, 220, "left");
-let leftArm = new arm(ctrX - 108, 500, 56, 220, "left");
-let rightArm = new arm(ctrX + 108, 500, 56, 220, "right");
+let leftArm = new arm(ctrX - 118, 200, 40, 220, "left");
+let rightArm = new arm(ctrX + 82, 200, 40, 220, "right");
 
 // .4.d leg
 let legPattern = "";
@@ -1126,13 +1056,13 @@ function draw() {
   clear();
   background(cnvsColor);
 
-  // Depiction of the head
+  // Depiction of the face
   if (tabNum == 1) {
     cnvs.position(0, 0);
     cnvsColor = "#ff980099";
     windowScale = 1.0;
     cnvs.parent("canvas1");
-    robotHead.draw();
+    robotFace.draw();
     robotDisplay.draw();
     robotMouse.draw();
     rightEye.draw(tabNum); // 右目
@@ -1152,8 +1082,8 @@ function draw() {
 
     robotNeck.draw();
 
-    robotHead.init(headPattern, 2);
-    robotHead.draw();
+    robotFace.init(facePattern, 2);
+    robotFace.draw();
     robotDisplay.draw();
     robotMouse.reCoordinate();
     robotMouse.draw();
@@ -1165,7 +1095,7 @@ function draw() {
   }
 
   if (tabNum == 3) {
-    cnvs.position(-160, 160);
+    cnvs.position(-160, 100);
     cnvsColor = "#ff980001";
     windowScale = 0.3;
     cnvs.parent("canvas3");
@@ -1177,7 +1107,7 @@ function draw() {
 
     robotNeck.draw();
 
-    robotHead.draw();
+    robotFace.draw();
     robotDisplay.draw();
     robotMouse.draw();
     rightEye.draw(tabNum); // 右目
@@ -1206,19 +1136,19 @@ function keyPressed() {
     if (keyCode === DOWN_ARROW) robotMouse.move("down");
   }
 
-  //Head
-  if (selected == "head") {
+  //face
+  if (selected == "face") {
     if (keyCode === UP_ARROW) {
       robotDisplay.move("up");
       leftEye.move("up"), rightEye.move("up");
       robotMouse.move("up");
-      robotHead.move("up");
+      robotFace.move("up");
     }
     if (keyCode === DOWN_ARROW) {
       robotMouse.move("down");
       leftEye.move("down"), rightEye.move("down");
       robotDisplay.move("down");
-      robotHead.move("down");
+      robotFace.move("down");
     }
   }
 
@@ -1264,18 +1194,10 @@ function keyPressed() {
 // 2.4 MOOUSE_RELEASED：マウスがリリース時 / MDC_Slider
 function mouseReleased() {
   // Color Slider
-  var cmRed = document
-    .getElementById("color-model-red")
-    .getAttribute("aria-valuenow");
-  var cmBlue = document
-    .getElementById("color-model-blue")
-    .getAttribute("aria-valuenow");
-  var cmGreen = document
-    .getElementById("color-model-green")
-    .getAttribute("aria-valuenow");
-  var cmAlpha = document
-    .getElementById("color-model-alpha")
-    .getAttribute("aria-valuenow");
+  var cmRed = document.getElementById("color-model-red").getAttribute("aria-valuenow");
+  var cmBlue = document.getElementById("color-model-blue").getAttribute("aria-valuenow");
+  var cmGreen = document.getElementById("color-model-green").getAttribute("aria-valuenow");
+  var cmAlpha = document.getElementById("color-model-alpha").getAttribute("aria-valuenow");
   if (selectColorParts == "eye") {
     (leftEye.colorRed = cmRed), (rightEye.colorRed = cmRed);
     (leftEye.colorBlue = cmBlue), (rightEye.colorBlue = cmBlue);
@@ -1294,80 +1216,51 @@ function mouseReleased() {
     robotNeck.colorGreen = cmGreen;
     robotNeck.colorAlpha = cmAlpha;
   }
-  if (selectColorParts == "head") {
-    robotHead.colorRed = cmRed;
-    robotHead.colorBlue = cmBlue;
-    robotHead.colorGreen = cmGreen;
-    robotHead.colorAlpha = cmAlpha;
+  if (selectColorParts == "face") {
+    robotFace.colorRed = cmRed;
+    robotFace.colorBlue = cmBlue;
+    robotFace.colorGreen = cmGreen;
+    robotFace.colorAlpha = cmAlpha;
   }
 
   // 目のスライドバー
-  var eyeSize = document
-    .getElementById("eye-size")
-    .getAttribute("aria-valuenow");
-  if (eyeSize != leftEye.width)
-    leftEye.resize(eyeSize, "size"), rightEye.resize(eyeSize, "size");
+  var eyeSize = document.getElementById("eye-size").getAttribute("aria-valuenow");
+  if (eyeSize != leftEye.width) leftEye.resize(eyeSize, "size"), rightEye.resize(eyeSize, "size");
   // 目の横幅
-  var eyeWidth = document
-    .getElementById("eye-width")
-    .getAttribute("aria-valuenow");
-  if (eyeWidth != leftEye.width)
-    leftEye.resize(eyeWidth, "width"), rightEye.resize(eyeWidth, "width");
+  var eyeWidth = document.getElementById("eye-width").getAttribute("aria-valuenow");
+  if (eyeWidth != leftEye.width) leftEye.resize(eyeWidth, "width"), rightEye.resize(eyeWidth, "width");
   // 目の縦幅
-  var eyeHeight = document
-    .getElementById("eye-height")
-    .getAttribute("aria-valuenow");
-  if (eyeHeight != leftEye.width)
-    leftEye.resize(eyeHeight, "height"), rightEye.resize(eyeHeight, "height");
+  var eyeHeight = document.getElementById("eye-height").getAttribute("aria-valuenow");
+  if (eyeHeight != leftEye.width) leftEye.resize(eyeHeight, "height"), rightEye.resize(eyeHeight, "height");
   // 瞳孔のスライドバー
-  var pupilRate = document
-    .getElementById("pupil-size")
-    .getAttribute("aria-valuenow");
+  var pupilRate = document.getElementById("pupil-size").getAttribute("aria-valuenow");
   leftEye.repupilSize(pupilRate), rightEye.repupilSize(pupilRate);
   // 口のスライダー
-  var mouseSize = document
-    .getElementById("slider-mouse")
-    .getAttribute("aria-valuenow");
+  var mouseSize = document.getElementById("slider-mouse").getAttribute("aria-valuenow");
   robotMouse.resize(mouseSize, "size");
   // 口の横幅
-  var mouseWidth = document
-    .getElementById("slider-mouse-width")
-    .getAttribute("aria-valuenow");
+  var mouseWidth = document.getElementById("slider-mouse-width").getAttribute("aria-valuenow");
   robotMouse.resize(mouseWidth, "width");
-  var mouseHeight = document
-    .getElementById("slider-mouse-height")
-    .getAttribute("aria-valuenow");
+  var mouseHeight = document.getElementById("slider-mouse-height").getAttribute("aria-valuenow");
   robotMouse.resize(mouseHeight, "height");
 
   // 首のスライダ
-  var neckSize = document
-    .getElementById("slider-neck")
-    .getAttribute("aria-valuenow");
+  var neckSize = document.getElementById("slider-neck").getAttribute("aria-valuenow");
   robotNeck.resize(neckSize);
   // 腕の横幅
-  var armWidth = document
-    .getElementById("slider-arm-width")
-    .getAttribute("aria-valuenow");
+  var armWidth = document.getElementById("slider-arm-width").getAttribute("aria-valuenow");
   leftArm.resize(armWidth, "width"), rightArm.resize(armWidth, "width");
   // 腕の横幅
-  var armHeight = document
-    .getElementById("slider-arm-height")
-    .getAttribute("aria-valuenow");
+  var armHeight = document.getElementById("slider-arm-height").getAttribute("aria-valuenow");
   leftArm.resize(armHeight, "height"), rightArm.resize(armHeight, "height");
   // 脚の横幅
-  var legWidth = document
-    .getElementById("slider-leg-width")
-    .getAttribute("aria-valuenow");
+  var legWidth = document.getElementById("slider-leg-width").getAttribute("aria-valuenow");
   leftLeg.resize(legWidth, "width"), rightLeg.resize(legWidth, "width");
   // 脚の横幅
-  var legHeight = document
-    .getElementById("slider-leg-height")
-    .getAttribute("aria-valuenow");
+  var legHeight = document.getElementById("slider-leg-height").getAttribute("aria-valuenow");
   leftLeg.resize(legHeight, "height"), rightLeg.resize(legHeight, "height");
   // 胴のスライダ
-  var bodySize = document
-    .getElementById("slider-body")
-    .getAttribute("aria-valuenow");
+  var bodySize = document.getElementById("slider-body").getAttribute("aria-valuenow");
   robotBody.resize(bodySize);
 }
 
@@ -1386,7 +1279,7 @@ function mouseDragged() {
     robotMouse.y = mouseY;
   }
 
-  if (selected == "head") {
+  if (selected == "face") {
     // controlPoint();
   }
 
@@ -1395,64 +1288,64 @@ function mouseDragged() {
 
 // 制御点の変更を行う関数
 function controlPoint() {
-  // console.log(robotHead.cx0);
-  if (selected == "head") {
-    if (mouseX <= robotHead.cx0 + 10 && mouseX >= robotHead.cx0 - 10) {
-      if (mouseY <= robotHead.cy0 + 10 && mouseY >= robotHead.cy0 - 10) {
-        robotHead.cy0 = mouseY;
+  // console.log(robotFace.cx0);
+  if (selected == "face") {
+    if (mouseX <= robotFace.cx0 + 10 && mouseX >= robotFace.cx0 - 10) {
+      if (mouseY <= robotFace.cy0 + 10 && mouseY >= robotFace.cy0 - 10) {
+        robotFace.cy0 = mouseY;
       }
     }
-    if (mouseX <= robotHead.cx1 + 10 && mouseX >= robotHead.cx1 - 10) {
-      if (mouseY <= robotHead.cy1 + 10 && mouseY >= robotHead.cy1 - 10) {
-        (robotHead.cx1 = mouseX), (robotHead.cy1 = mouseY);
-        (robotHead.cx9 = ctrX - (mouseX - ctrX)), (robotHead.cy9 = mouseY);
+    if (mouseX <= robotFace.cx1 + 10 && mouseX >= robotFace.cx1 - 10) {
+      if (mouseY <= robotFace.cy1 + 10 && mouseY >= robotFace.cy1 - 10) {
+        (robotFace.cx1 = mouseX), (robotFace.cy1 = mouseY);
+        (robotFace.cx9 = ctrX - (mouseX - ctrX)), (robotFace.cy9 = mouseY);
       }
     }
-    if (mouseX <= robotHead.cx2 + 10 && mouseX >= robotHead.cx2 - 10) {
-      if (mouseY <= robotHead.cy2 + 10 && mouseY >= robotHead.cy2 - 10) {
-        (robotHead.cx2 = mouseX), (robotHead.cy2 = mouseY);
-        (robotHead.cx8 = ctrX - (mouseX - ctrX)), (robotHead.cy8 = mouseY);
+    if (mouseX <= robotFace.cx2 + 10 && mouseX >= robotFace.cx2 - 10) {
+      if (mouseY <= robotFace.cy2 + 10 && mouseY >= robotFace.cy2 - 10) {
+        (robotFace.cx2 = mouseX), (robotFace.cy2 = mouseY);
+        (robotFace.cx8 = ctrX - (mouseX - ctrX)), (robotFace.cy8 = mouseY);
       }
     }
-    if (mouseX <= robotHead.cx3 + 10 && mouseX >= robotHead.cx3 - 10) {
-      if (mouseY <= robotHead.cy3 + 10 && mouseY >= robotHead.cy3 - 10) {
-        (robotHead.cx3 = mouseX), (robotHead.cy3 = mouseY);
-        (robotHead.cx7 = ctrX - (mouseX - ctrX)), (robotHead.cy7 = mouseY);
+    if (mouseX <= robotFace.cx3 + 10 && mouseX >= robotFace.cx3 - 10) {
+      if (mouseY <= robotFace.cy3 + 10 && mouseY >= robotFace.cy3 - 10) {
+        (robotFace.cx3 = mouseX), (robotFace.cy3 = mouseY);
+        (robotFace.cx7 = ctrX - (mouseX - ctrX)), (robotFace.cy7 = mouseY);
       }
     }
-    if (mouseX <= robotHead.cx4 + 10 && mouseX >= robotHead.cx4 - 10) {
-      if (mouseY <= robotHead.cy4 + 10 && mouseY >= robotHead.cy4 - 10) {
-        (robotHead.cx4 = mouseX), (robotHead.cy4 = mouseY);
-        (robotHead.cx6 = ctrX - (mouseX - ctrX)), (robotHead.cy6 = mouseY);
+    if (mouseX <= robotFace.cx4 + 10 && mouseX >= robotFace.cx4 - 10) {
+      if (mouseY <= robotFace.cy4 + 10 && mouseY >= robotFace.cy4 - 10) {
+        (robotFace.cx4 = mouseX), (robotFace.cy4 = mouseY);
+        (robotFace.cx6 = ctrX - (mouseX - ctrX)), (robotFace.cy6 = mouseY);
       }
     }
-    if (mouseX <= robotHead.cx5 + 10 && mouseX >= robotHead.cx5 - 10) {
-      if (mouseY <= robotHead.cy5 + 10 && mouseY >= robotHead.cy5 - 10) {
-        robotHead.cy5 = mouseY;
+    if (mouseX <= robotFace.cx5 + 10 && mouseX >= robotFace.cx5 - 10) {
+      if (mouseY <= robotFace.cy5 + 10 && mouseY >= robotFace.cy5 - 10) {
+        robotFace.cy5 = mouseY;
       }
     }
-    if (mouseX <= robotHead.cx9 + 10 && mouseX >= robotHead.cx9 - 10) {
-      if (mouseY <= robotHead.cy9 + 10 && mouseY >= robotHead.cy9 - 10) {
-        (robotHead.cx9 = mouseX), (robotHead.cy9 = mouseY);
-        (robotHead.cx1 = ctrX - (mouseX - ctrX)), (robotHead.cy1 = mouseY);
+    if (mouseX <= robotFace.cx9 + 10 && mouseX >= robotFace.cx9 - 10) {
+      if (mouseY <= robotFace.cy9 + 10 && mouseY >= robotFace.cy9 - 10) {
+        (robotFace.cx9 = mouseX), (robotFace.cy9 = mouseY);
+        (robotFace.cx1 = ctrX - (mouseX - ctrX)), (robotFace.cy1 = mouseY);
       }
     }
-    if (mouseX <= robotHead.cx8 + 10 && mouseX >= robotHead.cx8 - 10) {
-      if (mouseY <= robotHead.cy8 + 10 && mouseY >= robotHead.cy8 - 10) {
-        (robotHead.cx8 = mouseX), (robotHead.cy8 = mouseY);
-        (robotHead.cx2 = ctrX - (mouseX - ctrX)), (robotHead.cy2 = mouseY);
+    if (mouseX <= robotFace.cx8 + 10 && mouseX >= robotFace.cx8 - 10) {
+      if (mouseY <= robotFace.cy8 + 10 && mouseY >= robotFace.cy8 - 10) {
+        (robotFace.cx8 = mouseX), (robotFace.cy8 = mouseY);
+        (robotFace.cx2 = ctrX - (mouseX - ctrX)), (robotFace.cy2 = mouseY);
       }
     }
-    if (mouseX <= robotHead.cx7 + 10 && mouseX >= robotHead.cx7 - 10) {
-      if (mouseY <= robotHead.cy7 + 10 && mouseY >= robotHead.cy7 - 10) {
-        (robotHead.cx7 = mouseX), (robotHead.cy7 = mouseY);
-        (robotHead.cx3 = ctrX - (mouseX - ctrX)), (robotHead.cy3 = mouseY);
+    if (mouseX <= robotFace.cx7 + 10 && mouseX >= robotFace.cx7 - 10) {
+      if (mouseY <= robotFace.cy7 + 10 && mouseY >= robotFace.cy7 - 10) {
+        (robotFace.cx7 = mouseX), (robotFace.cy7 = mouseY);
+        (robotFace.cx3 = ctrX - (mouseX - ctrX)), (robotFace.cy3 = mouseY);
       }
     }
-    if (mouseX <= robotHead.cx6 + 10 && mouseX >= robotHead.cx6 - 10) {
-      if (mouseY <= robotHead.cy6 + 10 && mouseY >= robotHead.cy6 - 10) {
-        (robotHead.cx6 = mouseX), (robotHead.cy6 = mouseY);
-        (robotHead.cx4 = ctrX - (mouseX - ctrX)), (robotHead.cy4 = mouseY);
+    if (mouseX <= robotFace.cx6 + 10 && mouseX >= robotFace.cx6 - 10) {
+      if (mouseY <= robotFace.cy6 + 10 && mouseY >= robotFace.cy6 - 10) {
+        (robotFace.cx6 = mouseX), (robotFace.cy6 = mouseY);
+        (robotFace.cx4 = ctrX - (mouseX - ctrX)), (robotFace.cy4 = mouseY);
       }
     }
   }
@@ -1526,8 +1419,8 @@ function onPalletClick(colorValue) {
   if (selectColorParts == "neck") {
     robotNeck.reColor(mdcPalette[colorValue]);
   }
-  if (selectColorParts == "head") {
-    robotHead.reColor(mdcPalette[colorValue]);
+  if (selectColorParts == "face") {
+    robotFace.reColor(mdcPalette[colorValue]);
   }
 }
 
@@ -1563,8 +1456,8 @@ function changeSelect(parts) {
   changedPattern(eyeListItem.innerHTML, "eye");
   var mouseListItem = document.getElementById("mouse-list-item");
   changedPattern(mouseListItem.innerHTML, "mouse");
-  var headListItem = document.getElementById("head-list-item");
-  changedPattern(headListItem.innerHTML, "head");
+  var faceListItem = document.getElementById("face-list-item");
+  changedPattern(faceListItem.innerHTML, "face");
   var displayListItem = document.getElementById("display-list-item");
   changedPattern(displayListItem.innerHTML, "display");
   var neckListItem = document.getElementById("neck-list-item");
@@ -1579,14 +1472,14 @@ function changeSelect(parts) {
 
 // CHANGED_PATTERN：セレクタによりパターンを変更する関数
 function changedPattern(pattern, element) {
-  // - Head -
+  // - face -
   // Eye
   if (element == "eye") leftEye.init(pattern), rightEye.init(pattern);
   // Mouse
   if (element == "mouse") mousePattern = pattern;
-  // Head
-  if (element == "head") robotHead.init(pattern);
-  // if (element == "head") headPattern = pattern;
+  // face
+  if (element == "face") robotFace.init(pattern);
+  // if (element == "face") facePattern = pattern;
   // Display
   if (element == "display") displayPattern = pattern;
   // - Body -

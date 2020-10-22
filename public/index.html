@@ -31,7 +31,6 @@
         <span class="mdc-top-app-bar__title">Dearobot</span>
       </section>
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-        <!-- <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button> -->
         <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="help">help</button>
         <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
           aria-label="Options">more_vert</button>
@@ -425,7 +424,7 @@
                 <div class="mdc-select mdc-select--filled demo-width-class head-select">
                   <div class="mdc-select__anchor">
                     <span class="mdc-select__ripple"></span>
-                    <span id="head-list-item" class="mdc-select__selected-text"></span>
+                    <span id="face-list-item" class="mdc-select__selected-text"></span>
                     <span class="mdc-select__dropdown-icon">
                       <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">
                         <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
@@ -461,8 +460,8 @@
                   </div>
                 </div>
                 <button class="mdc-icon-button material-icons head-edit-icons edit-icon-button"
-                  onclick="selectElement(`head`)">edit</button>
-                <button class="mdc-icon-button material-icons edit-icon-button" onclick="changeColor(`head`)"
+                  onclick="selectElement(`face`)">edit</button>
+                <button class="mdc-icon-button material-icons edit-icon-button" onclick="changeColor(`face`)"
                   id="color-dialog">color_lens</button>
                 <button class="mdc-icon-button material-icons edit-icon-button">control_camera</button>
               </div>
@@ -768,7 +767,7 @@
             <div class="head-parts">
               <p class="parts-title">頭部の位置を編集してください</p>
               <div class="row-1">
-                <button class="mdc-button mdc-button--outlined head-button" onclick="selectElement(`head`)">
+                <button class="mdc-button mdc-button--outlined head-button" onclick="selectElement(`face`)">
                   <div class="mdc-button__ripple"></div>
                   <span class="mdc-button__label">移動</span>
                 </button>
