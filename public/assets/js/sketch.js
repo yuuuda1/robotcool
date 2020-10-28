@@ -35,7 +35,7 @@ const ctrY = cnvsH / 2; // 中央のY座標
 /* -- 1.1 HEAD -- */
 // -- x.1.a Eye / 目
 class eye {
-  constructor(x, y, width, height, scale, lor) {
+  constructor(x, y, width, height, scale, pupilScale, lor) {
     this.x = x; // X座標
     this.y = y; // Y座標
     this.width = width; // 横幅(width)
@@ -43,46 +43,79 @@ class eye {
     this.scale = scale; // 全体のスケール
     this.widthScale = 1; // 横幅のスケール
     this.heightScale = 1; // 縦幅のスケール
-    this.pupilScale = 0.5; // 瞳孔のスケール
+    this.pupilScale = pupilScale; // 瞳孔のスケール
     this.colorRed = 0; // 赤色のGBR値
     this.colorGreen = 0; // 緑色のGBR値
     this.colorBlue = 0; // 青色のGBR値
-    this.colorAlpha = 0; // アルファ値
+    this.colorAlpha = 100; // アルファ値
     this.lor = lor; // 右か左か
   }
 
   init(pattern) {
-    if (pattern == "パターン１")
-      (rightEye = new eye(cnvsW / 2 - 100, 260, 50, 50, 1.0, "rightEye")),
-        (leftEye = new eye(cnvsW / 2 + 100, 260, 50, 50, 1.0, "leftEye"));
-    if (pattern == "パターン２")
-      (rightEye = new eye(cnvsW / 2 - 100, 260, 60, 50, 1.0, "rightEye")),
-        (leftEye = new eye(cnvsW / 2 + 100, 260, 60, 50, 1.0, "leftEye"));
-    if (pattern == "パターン３")
-      (rightEye = new eye(cnvsW / 2 - 100, 260, 50, 68, 1.0, "rightEye")),
-        (leftEye = new eye(cnvsW / 2 + 100, 260, 50, 68, 1.0, "leftEye"));
+    // 正円の目
+    if (pattern == "パターン１") {
+      rightEye = new eye(cnvsW / 2 - 88, 260, 80, 80, 1.0, 0.5, "rightEye");
+      leftEye = new eye(cnvsW / 2 + 88, 260, 80, 80, 1.0, 0.5, "leftEye");
+    }
+    // 正円の目(瞳孔のみ)
+    if (pattern == "パターン２") {
+      rightEye = new eye(cnvsW / 2 - 88, 260, 80, 80, 1.0, 1.0, "rightEye");
+      leftEye = new eye(cnvsW / 2 + 88, 260, 80, 80, 1.0, 1.0, "leftEye");
+    }
+    // 縦長の目
+    if (pattern == "パターン３") {
+      rightEye = new eye(cnvsW / 2 - 80, 280, 56, 104, 1.0, 0.4, "rightEye");
+      leftEye = new eye(cnvsW / 2 + 80, 280, 56, 104, 1.0, 0.4, "leftEye");
+    }
+    // 縦長の目(瞳孔のみ)
+    if (pattern == "パターン４") {
+      rightEye = new eye(cnvsW / 2 - 80, 280, 56, 104, 1.0, 1.0, "rightEye");
+      leftEye = new eye(cnvsW / 2 + 80, 280, 56, 104, 1.0, 1.0, "leftEye");
+    }
+    // 横長の目
+    if (pattern == "パターン５") {
+      rightEye = new eye(cnvsW / 2 - 80, 280, 104, 56, 1.0, 0.4, "rightEye");
+      leftEye = new eye(cnvsW / 2 + 80, 280, 104, 56, 1.0, 0.4, "leftEye");
+    }// 横長の目(瞳孔のみ)
+    if (pattern == "パターン６") {
+      rightEye = new eye(cnvsW / 2 - 80, 280, 104, 56, 1.0, 1.0, "rightEye");
+      leftEye = new eye(cnvsW / 2 + 80, 280, 104, 56, 1.0, 1.0, "leftEye");
+    }
+    // 小さい瞳孔 
+    if (pattern == "パターン７") {
+      rightEye = new eye(cnvsW / 2 - 80, 280, 80, 80, 1.0, 0.2, "rightEye");
+      leftEye = new eye(cnvsW / 2 + 80, 280, 80, 80, 1.0, 0.2, "leftEye");
+    }
+    // 人の目 
+    if (pattern == "パターン８") {
+      rightEye = new eye(cnvsW / 2 - 130, 260, 80, 80, 1.0, 0.2, "rightEye");
+      leftEye = new eye(cnvsW / 2 + 30, 260, 80, 80, 1.0, 0.2, "leftEye");
+    }
+    
     eyePattern = pattern;
   }
 
   draw(tabNum) {
     if (tabNum == 1) {
-      fill("#FFF"); // Eye
-      ellipse(this.x, this.y, this.width, this.height);
-      // fill('#222222'); // Pupil
-      fill(
-        color(
-          this.colorRed,
-          this.colorGreen,
-          this.colorBlue,
-          this.colorAlpha * 2.55
-        )
-      );
-      ellipse(
-        this.x,
-        this.y,
-        this.width * this.pupilScale,
-        this.height * this.pupilScale
-      );
+      if(eyePattern == "パターン８") {
+        beginShape();
+        vertex(0 + this.x, 20 + this.y);
+        bezierVertex(0 + this.x, 20 + this.y, 10 + this.x, 18 + this.y, 30 + this.x, 10 + this.y);
+        bezierVertex(30 + this.x, 10 + this.y, 40 + this.x, 6 + this.y, 50 + this.x, 6 + this.y);
+        bezierVertex(50 + this.x, 6 + this.y, 60 + this.x, 6 + this.y, 70 + this.x, 10 + this.y);
+        bezierVertex(70 + this.x, 10 + this.y, 90 + this.x, 18 + this.y, 100 + this.x, 20 + this.y);
+        bezierVertex(100 + this.x, 20 + this.y, 90 + this.x, 30 + this.y, 50 + this.x, 34 + this.y);
+        bezierVertex(50 + this.x, 34 + this.y, 10 + this.x, 30 + this.y, 0 + this.x, 20 + this.y);
+        endShape();
+        fill(color(this.colorRed,this.colorGreen,this.colorBlue,this.colorAlpha * 2.55));
+        ellipse(50 + this.x, 20 + this.y, 26, 26);
+        fill("#FFF"); // Eye
+      }else {
+        fill("#FFF"); // Eye
+        ellipse(this.x, this.y, this.width, this.height);
+        fill(color(this.colorRed,this.colorGreen,this.colorBlue,this.colorAlpha * 2.55));
+        ellipse(this.x,this.y,this.width * this.pupilScale,this.height * this.pupilScale);   
+      }
     }
     if (tabNum == 2 || tabNum == 3) {
       if (this.x < cnvsW / 2)
@@ -96,7 +129,6 @@ class eye {
         this.width * windowScale,
         this.height * windowScale
       );
-      // fill('#222222'); // Pupil
       fill(
         color(
           this.colorRed,
@@ -139,10 +171,13 @@ class eye {
       this.height = (this.height * value) / this.scale;
       this.scale = value;
     }
+    console.log(this.width, this.height);
   }
 
   repupilSize(value) {
-    this.pupilScale = value;
+    if((eyePattern == "")||(eyePattern == "パターン１")) {
+      this.pupilScale = value;      
+    }
   }
 
   reColor(color) {
@@ -151,12 +186,6 @@ class eye {
     this.colorBlue = color[2];
     this.colorAlpha = color[3];
     syncSelectorValue(
-      this.colorRed,
-      this.colorGreen,
-      this.colorBlue,
-      this.colorAlpha
-    );
-    console.log(
       this.colorRed,
       this.colorGreen,
       this.colorBlue,
@@ -597,8 +626,8 @@ let windowScale = 1.0;
 
 // .2.a Eye
 let eyePattern = "";
-let rightEye = new eye(cnvsW / 2 - 100, 260, 50, 50, 1.0, "rightEye"); // 右目
-let leftEye = new eye(cnvsW / 2 + 100, 260, 50, 50, 1.0, "leftEye"); // 左目
+let rightEye = new eye(cnvsW / 2 - 88, 260, 80, 80, 1.0, 0.5, "rightEye"); // 右目
+let leftEye = new eye(cnvsW / 2 + 88, 260, 80, 80, 1.0, 0.5, "leftEye"); // 左目
 
 // .2.b Mouse
 let mousePattern = "";
@@ -1187,7 +1216,7 @@ function draw() {
     rightArm.draw();
   }
 
-  changeSelect();
+  // changeSelect();
 }
 
 // 2.3 KEYPRESSED：キーが押された場合
@@ -1393,6 +1422,11 @@ function mouseDragged() {
   controlPoint();
 }
 
+// 2.6 MOUSE_CLICKED：マウスがクリックされた時 / MDC_Select
+function mouseClicked() {
+  changeSelect();
+}
+
 // 制御点の変更を行う関数
 function controlPoint() {
   // console.log(robotHead.cx0);
@@ -1578,27 +1612,31 @@ function changeSelect(parts) {
 }
 
 // CHANGED_PATTERN：セレクタによりパターンを変更する関数
+let preEyeTemp = null;
 function changedPattern(pattern, element) {
-  // - Head -
-  // Eye
-  if (element == "eye") leftEye.init(pattern), rightEye.init(pattern);
-  // Mouse
-  if (element == "mouse") mousePattern = pattern;
-  // Head
-  if (element == "head") robotHead.init(pattern);
-  // if (element == "head") headPattern = pattern;
-  // Display
-  if (element == "display") displayPattern = pattern;
-  // - Body -
-  // Neck
-  if (element == "neck") neckPattern = pattern;
-  // Arm
-  if (element == "arm") rightArm.init(pattern), leftArm.init(pattern);
-  // Leg
-  if (element == "leg") legPattern = pattern;
-  // Body
-  if (element == "body") robotBody.init(pattern);
-  // if (element == "body") bodyPattern = pattern, robotBody.init(pattern);
+    // - Head -
+    // Eye
+    if ((element == "eye")&&(preEyeTemp != pattern)) {
+      leftEye.init(pattern);
+      rightEye.init(pattern);
+      preEyeTemp = pattern;
+    }
+    // Mouse
+    if (element == "mouse") mousePattern = pattern;
+    // Head
+    if (element == "head") robotHead.init(pattern);
+    // if (element == "head") headPattern = pattern;
+    // Display
+    if (element == "display") displayPattern = pattern;
+    // - Body -
+    // Neck
+    if (element == "neck") neckPattern = pattern;
+    // Arm
+    if (element == "arm") rightArm.init(pattern), leftArm.init(pattern);
+    // Leg
+    if (element == "leg") legPattern = pattern;
+    // Body
+    if (element == "body") robotBody.init(pattern);
 }
 
 // TAB_SWICHING：タブの遷移時にコンテンツを切り替える関数
