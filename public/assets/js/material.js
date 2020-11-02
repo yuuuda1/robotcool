@@ -34,7 +34,7 @@ const topAppBar = mdc.topAppBar.MDCTopAppBar.attachTo(topAppBarElement);
 // mdc.ripple.MDCRipple.attachTo(document.querySelector('.eye-button'));
 // - Mouse - 
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.mouse-button'));
-// - head - 
+// - Head - 
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.head-button'));
 
 
@@ -53,13 +53,6 @@ colorDialog.listen('MDCDialog:opened', () => {
   cmBlue.layout();
   cmAlpha.layout();
 });
-// const canvasDialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.canvas-dialog'));
-// canvasDialog.listen('MDCDialog:opened', () => {
-//   console.log("canvas dailog");
-// });
-// colorDialog.listen('MDCDialog:closed', () => {
-//   console.log("close dailog");
-// });
 
 const elmA = document.querySelectorAll('#color-dialog');
 for (let i = 0; i < elmA.length; i++) {
@@ -68,10 +61,7 @@ for (let i = 0; i < elmA.length; i++) {
   });
 }
 
-// document.querySelector('#mouse-color-dailog').addEventListener('click', function (evt) {
-//   // colorDialog.open();
-// });
-
+// ダイアログのリセット
 function reloadButton() {
   var value = document.getElementById("color-model-red").getAttribute("now") - document.getElementById("color-model-red").getAttribute("aria-valuenow");
   if (value > 0) cmRed.stepUp(value);
@@ -140,7 +130,7 @@ armHeight.listen('MDCSlider:change', () => console.log(`Value changed to ${armHe
 const legWidth = mdc.slider.MDCSlider.attachTo(document.querySelector('.leg-width'));
 legWidth.listen('MDCSlider:change', () => console.log(`Value changed to ${legWidth.value}`));
 const legHeight = mdc.slider.MDCSlider.attachTo(document.querySelector('.leg-height'));
-legHeight.listen('MDCSlider:change', () => console.log(`Value changed to ${legHeight.value}`));
+// legHeight.listen('MDCSlider:change', () => console.log(`Value changed to ${legHeight.value}`));
 // - Body - 
 // const bodySlider = mdc.slider.MDCSlider.attachTo(document.querySelector('.body-size'));
 // bodySlider.listen('MDCSlider:change', () => console.log(`Value changed to ${bodySlider.value}`));
